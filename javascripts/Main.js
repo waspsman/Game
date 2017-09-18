@@ -39,10 +39,34 @@ Stages.play = function(game) {
 
 Stages.play.prototype = {
     preload: function() {
-        game.load.image('bg', './photo/bg.png');
+        game.load.image('start', './photo/start.png');
+        game.load.image('play', './photo/play.png')
     },
     create: function() {
-        game.add.sprite(150, 150, 'bg');
+        game.add.sprite(0, 0, 'start');
+        var btnPlay = game.add.sprite(536, 325, 'play');
+
+        btnPlay.inputEnabled = true;
+        btnPlay.events.onInputDown.add(this.copd, this);
+    },
+
+    copd: function() {
+        this.state.start('copd1');
+    }
+
+};
+
+Stages.copd1 = function(game) {
+
+};
+
+Stages.copd1.prototype = {
+    preload: function() {
+        game.load.image('copd1', './photo/copd1.png')
+
+    },
+    create: function() {
+        game.add.sprite(0, 0, 'copd1');
     }
 };
 
@@ -72,6 +96,7 @@ Stages.Blue = function(game) {
 Stages.Blue.prototype = {
     preload: function() {
         game.load.image('bg', './photo/bg.png')
+
     },
     create: function() {
         //this.game.stage.backgroundCol = "#051efa";
@@ -88,9 +113,10 @@ Stages.Blue.prototype = {
     }
 };
 
-var game = new Phaser.Game(500, 500, Phaser.AUTO, 'game');
+var game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
 game.state.add('Menu', Stages.Menu);
 game.state.add('Blue', Stages.Blue);
 game.state.add('Red', Stages.Red);
 game.state.add('play', Stages.play);
+game.state.add('copd1', Stages.copd1);
 game.state.start('Menu');
