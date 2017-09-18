@@ -11,16 +11,10 @@ Stages.Menu.prototype = {
 
         text3 = this.add.text(536, 325, 'Start Game', { fill: "#ffffff" });
 
-
         text3.inputEnabled = true;
         text3.events.onInputDown.add(this.play, this);
     },
-    blue: function() {
-        this.state.start('Blue');
-    },
-    red: function() {
-        this.state.start('Red');
-    },
+
     play: function() {
         this.state.start('play');
     }
@@ -171,13 +165,12 @@ Stages.copd4.prototype = {
     }
 };
 
-var game = new Phaser.Game(1280, 720, Phaser.AUTO, 'game');
+var game = new Phaser.Game(900, 500, Phaser.AUTO, 'game');
 game.state.add('Menu', Stages.Menu);
-game.state.add('Blue', Stages.Blue);
-game.state.add('Red', Stages.Red);
 game.state.add('play', Stages.play);
 game.state.add('copd1', Stages.copd1);
 game.state.add('copd2', Stages.copd2);
 game.state.add('copd3', Stages.copd3);
 game.state.add('copd4', Stages.copd4);
+game.state.add('playGame', Stages.playGame);
 game.state.start('Menu');
