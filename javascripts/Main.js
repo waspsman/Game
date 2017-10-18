@@ -214,7 +214,9 @@ Stages.playGame.prototype = {
         game.load.image('iv', './photo/iv.png');
         game.load.image('med', './photo/med.png');
         game.load.image('vs', './photo/vs.png');
-        game.load.image('notify', './photo/notify.png')
+        game.load.image('notify', './photo/notify.png');
+        game.load.image('end', './photo/end.png');
+        game.load.image('start2', './photo/start2.png');
 
         game.load.image('p1', './photo/position/1.png');
         game.load.image('p2', './photo/position/2.png');
@@ -253,8 +255,21 @@ Stages.playGame.prototype = {
         game.add.sprite(0, 0, 'bg');
         game.add.sprite(0, 0, 'board');
 
+
+
+        startlogo = game.add.sprite(game.world.centerX / 2, game.world.centerY / 2, 'start2')
+
+
+        //add Time
+        timer = game.time.create();
+        timerEvent = timer.add(Phaser.Timer.MINUTE * 0 + Phaser.Timer.SECOND * 1, this.endTimer, this);
+
+        timer.start();
+
         //add choice
         this.choice = game.add.group();
+
+
 
         //add buttons
         var notify = this.choice.create(150, game.world.height - 70, 'notify');
@@ -295,6 +310,25 @@ Stages.playGame.prototype = {
         vs.events.onInputDown.add(this.eventVs, this);
     },
 
+    render: function() {
+        // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
+        if (timer.running) {
+            game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 2, 14, "#ff0");
+        } else {
+            startlogo.destroy();
+        }
+    },
+    endTimer: function() {
+        // Stop the timer when the delayed event triggers
+        timer.stop();
+    },
+    formatTime: function(s) {
+        // Convert seconds (s) to a nicely formatted and padded time string
+        var minutes = "0" + Math.floor(s / 60);
+        var seconds = "0" + (s - minutes * 60);
+        return minutes.substr(-2) + ":" + seconds.substr(-2);
+    },
+
     eventNotify: function() {
 
     },
@@ -316,13 +350,13 @@ Stages.playGame.prototype = {
         cancleP.events.onInputDown.add(this.canCleP, this);
     },
     p1: function() {
-
+        this.choiceP.destroy();
     },
     p2: function() {
-
+        this.choiceP.destroy();
     },
     p3: function() {
-
+        this.choiceP.destroy();
     },
     canCleP: function() {
         this.choiceP.destroy();
@@ -353,19 +387,19 @@ Stages.playGame.prototype = {
         cancleO.events.onInputDown.add(this.canCleO, this);
     },
     o1: function() {
-
+        this.choiceO.destroy();
     },
     o2: function() {
-
+        this.choiceO.destroy();
     },
     o3: function() {
-
+        this.choiceO.destroy();
     },
     o4: function() {
-
+        this.choiceO.destroy();
     },
     o5: function() {
-
+        this.choiceO.destroy();
     },
     canCleO: function() {
         this.choiceO.destroy();
@@ -396,19 +430,19 @@ Stages.playGame.prototype = {
         cancleI.events.onInputDown.add(this.canCleI, this);
     },
     i1: function() {
-
+        this.choiceI.destroy();
     },
     i2: function() {
-
+        this.choiceI.destroy();
     },
     i3: function() {
-
+        this.choiceI.destroy();
     },
     i4: function() {
-
+        this.choiceI.destroy();
     },
     i5: function() {
-
+        this.choiceI.destroy();
     },
     canCleI: function() {
         this.choiceI.destroy();
@@ -439,19 +473,19 @@ Stages.playGame.prototype = {
         cancleM.events.onInputDown.add(this.canCleM, this);
     },
     m1: function() {
-
+        this.choiceM.destroy();
     },
     m2: function() {
-
+        this.choiceM.destroy();
     },
     m3: function() {
-
+        this.choiceM.destroy();
     },
     m4: function() {
-
+        this.choiceM.destroy();
     },
     m5: function() {
-
+        this.choiceM.destroy();
     },
     canCleM: function() {
         this.choiceM.destroy();
@@ -479,16 +513,16 @@ Stages.playGame.prototype = {
         cancleV.events.onInputDown.add(this.canCleV, this);
     },
     v1: function() {
-
+        this.choiceV.destroy();
     },
     v2: function() {
-
+        this.choiceV.destroy();
     },
     v3: function() {
-
+        this.choiceV.destroy();
     },
     v4: function() {
-
+        this.choiceV.destroy();
     },
     canCleV: function() {
         this.choiceV.destroy();
@@ -501,7 +535,11 @@ Stages.playGame.prototype = {
 var scaleNextW = 750;
 var scaleBackW = 710;
 var scaleNextH = 400;
-var scaleBackH = 360
+var scaleBackH = 360;
+
+var timer, timerEvent, text;
+
+var startlogo;
 
 var game = new Phaser.Game(900, 500, Phaser.AUTO, 'game');
 game.state.add('Menu', Stages.Menu);
