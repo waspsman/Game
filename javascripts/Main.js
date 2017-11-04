@@ -9,7 +9,9 @@ Stages.Menu.prototype = {
     create: function() {
         this.game.stage.backgroundColor = '#000';
 
-        text3 = this.add.text(536, 325, 'Start Game', { fill: "#ffffff" });
+        text3 = this.add.text(450, 250, 'Start Game', { fill: "#ffffff" });
+        text3.anchor.x = 0.5;
+        text3.anchor.y = 0.5;
 
         text3.inputEnabled = true;
         text3.events.onInputDown.add(this.play, this);
@@ -33,11 +35,20 @@ Stages.play.prototype = {
         game.load.image('play', './photo/play.png')
     },
     create: function() {
+        game.add.plugin(PhaserInput.Plugin);
+        var input = game.add.inputField(1000, 900);
+
+
         game.add.sprite(0, 0, 'start');
         var btnPlay = game.add.sprite(scaleNextW, scaleNextH, 'play');
 
+        //var email = this.add.text(450, 250, 'Fuckkkkkkk', { fill: "#000000" });
+
         btnPlay.inputEnabled = true;
         btnPlay.events.onInputDown.add(this.roleCopd, this);
+
+        //game.input.keyboard.addCallbacks(this, null, this.keyPress, null);
+
     },
 
     roleCopd: function() {
@@ -218,6 +229,26 @@ Stages.playGame.prototype = {
         game.load.image('end', './photo/end.png');
         game.load.image('start2', './photo/start2.png');
 
+        game.load.image('bar', './photo/bar.png');
+        game.load.image('bar1', './photo/bar1.png');
+        game.load.image('bar2', './photo/bar2.png');
+        game.load.image('bar3', './photo/bar3.png');
+        game.load.image('bar4', './photo/bar4.png');
+        game.load.image('bar5', './photo/bar5.png');
+        game.load.image('bar6', './photo/bar6.png');
+        game.load.image('bar7', './photo/bar7.png');
+        game.load.image('bar8', './photo/bar8.png');
+        game.load.image('bar9', './photo/bar9.png');
+        game.load.image('bar10', './photo/bar10.png');
+        game.load.image('bar11', './photo/bar11.png');
+        game.load.image('bar12', './photo/bar12.png');
+
+        game.load.image('Abar', './photo/a.png');
+        game.load.image('Bbar', './photo/b.png');
+        game.load.image('Cbar', './photo/c.png');
+        game.load.image('Dbar', './photo/d.png');
+        game.load.image('Ebar', './photo/e.png');
+
         game.load.image('p1', './photo/position/1.png');
         game.load.image('p2', './photo/position/2.png');
         game.load.image('p3', './photo/position/3.png');
@@ -249,27 +280,130 @@ Stages.playGame.prototype = {
         game.load.image('v3', './photo/vs/3.png');
         game.load.image('v4', './photo/vs/4.png');
         game.load.image('cancleV', './photo/vs/cancle.png');
+
+        game.load.image('S3', './photo/cheang3/1.png');
+        game.load.image('B3', './photo/cheang3/2.png');
+        game.load.image('A3', './photo/cheang3/3.png');
+        game.load.image('R3', './photo/cheang3/4.png');
     },
     create: function() {
+
+        game.physics.startSystem(Phaser.Physics.ARCADE);
+
         //add backgroud and borad
         game.add.sprite(0, 0, 'bg');
         game.add.sprite(0, 0, 'board');
 
-
-
-        startlogo = game.add.sprite(game.world.centerX / 2, game.world.centerY / 2, 'start2')
-
+        startlogo = game.add.sprite(450, 250, 'start2')
+        startlogo.anchor.x = 0.5;
+        startlogo.anchor.y = 0.5;
+        game.time.events.add(1000, this.rmStart, this, startlogo);
 
         //add Time
         timer = game.time.create();
-        timerEvent = timer.add(Phaser.Timer.MINUTE * 0 + Phaser.Timer.SECOND * 1, this.endTimer, this);
+
+        timerEvent = timer.add(Phaser.Timer.MINUTE * 0 + Phaser.Timer.SECOND * 5, this.endTimer, this);
 
         timer.start();
 
+
+        var btnNext = game.add.sprite(scaleNextW, scaleNextH, 'next');
+        btnNext.inputEnabled = true;
+        btnNext.events.onInputDown.add(this.cheangGame, this);
+
+        //add group AwserBar
+        this.awserBar = game.add.group();
+        Abar = this.awserBar.create(150, game.world.height - 70, 'Abar');
+        Bbar = this.awserBar.create(270, game.world.height - 70, 'Bbar');
+        Cbar = this.awserBar.create(390, game.world.height - 70, 'Cbar');
+        Dbar = this.awserBar.create(510, game.world.height - 70, 'Dbar');
+        Ebar = this.awserBar.create(630, game.world.height - 70, 'Ebar');
+
+        //add groub bar
+        this.choiceBar = game.add.group();
+        bar = this.choiceBar.create(50, game.world.height - 160, 'bar');
+        bar1 = this.choiceBar.create(70, game.world.height - 140, 'bar1');
+        bar2 = this.choiceBar.create(120, game.world.height - 140, 'bar2');
+        bar3 = this.choiceBar.create(170, game.world.height - 140, 'bar3');
+        bar4 = this.choiceBar.create(220, game.world.height - 140, 'bar4');
+        bar5 = this.choiceBar.create(270, game.world.height - 140, 'bar5');
+        bar6 = this.choiceBar.create(320, game.world.height - 140, 'bar6');
+        bar7 = this.choiceBar.create(370, game.world.height - 140, 'bar7');
+        bar8 = this.choiceBar.create(420, game.world.height - 140, 'bar1');
+        bar9 = this.choiceBar.create(470, game.world.height - 140, 'bar8');
+        bar10 = this.choiceBar.create(520, game.world.height - 140, 'bar9');
+        bar11 = this.choiceBar.create(570, game.world.height - 140, 'bar6');
+        bar12 = this.choiceBar.create(620, game.world.height - 140, 'bar10');
+        bar13 = this.choiceBar.create(670, game.world.height - 140, 'bar11');
+        bar14 = this.choiceBar.create(720, game.world.height - 140, 'bar12');
+        bar15 = this.choiceBar.create(770, game.world.height - 140, 'bar6');
+
+        bar1.inputEnabled = true;
+        bar1.input.enableDrag();
+        bar1.events.onDragStop.add(this.onDragStop, this);
+        bar2.inputEnabled = true;
+        bar2.input.enableDrag();
+        bar3.inputEnabled = true;
+        bar3.input.enableDrag();
+        bar4.inputEnabled = true;
+        bar4.input.enableDrag();
+        bar5.inputEnabled = true;
+        bar5.input.enableDrag();
+        bar6.inputEnabled = true;
+        bar6.input.enableDrag();
+        bar7.inputEnabled = true;
+        bar7.input.enableDrag();
+        bar8.inputEnabled = true;
+        bar8.input.enableDrag();
+        bar9.inputEnabled = true;
+        bar9.input.enableDrag();
+        bar10.inputEnabled = true;
+        bar10.input.enableDrag();
+        bar11.inputEnabled = true;
+        bar11.input.enableDrag();
+        bar12.inputEnabled = true;
+        bar12.input.enableDrag();
+        bar13.inputEnabled = true;
+        bar13.input.enableDrag();
+        bar14.inputEnabled = true;
+        bar14.input.enableDrag();
+        bar15.inputEnabled = true;
+        bar15.input.enableDrag();
+
+        //bar1.events.onDragStop.add(onDragStop, this);
+        //game.physics.arcade.enable([this.bar1, this.Abar], Phaser.Physics.ARCADE);
+
+
+    },
+    onDragStop: function() {
+        //console.log('eieieiei');
+        if (this.checkOverlap(Abar, bar1)) {
+            console.log('eieieiei');
+        }
+    },
+    rmStart: function(logo) {
+        startlogo.destroy();
+
+    },
+    cheangGame: function() {
+        if (count == '0') {
+            this.cheang2();
+            count = '1';
+        } else if (count == '1') {
+            this.cheang3();
+            count = '2';
+        } else {
+            this.cheang4();
+            console.log('choice4');
+            //count++;
+        }
+    },
+    cheang2: function() {
+        this.awserBar.destroy();
+        this.choiceBar.destroy();
+
         //add choice
         this.choice = game.add.group();
-
-
 
         //add buttons
         var notify = this.choice.create(150, game.world.height - 70, 'notify');
@@ -281,14 +415,10 @@ Stages.playGame.prototype = {
         var oxygen = this.choice.create(390, game.world.height - 70, 'oxygen');
         oxygen.scale.setTo(0.65, 0.65);
 
-        var iv = this.choice.create(510, game.world.height - 70, 'iv');
-        iv.scale.setTo(0.65, 0.65);
-
-        var med = this.choice.create(630, game.world.height - 70, 'med');
+        var med = this.choice.create(510, game.world.height - 70, 'med');
         med.scale.setTo(0.65, 0.65);
 
-        var vs = this.choice.create(750, game.world.height - 70, 'vs');
-        vs.scale.setTo(0.65, 0.65);
+
 
         //add event
         notify.inputEnabled = true;
@@ -300,22 +430,64 @@ Stages.playGame.prototype = {
         oxygen.inputEnabled = true;
         oxygen.events.onInputDown.add(this.eventOxygen, this);
 
-        iv.inputEnabled = true;
-        iv.events.onInputDown.add(this.eventIv, this);
-
         med.inputEnabled = true;
         med.events.onInputDown.add(this.eventMed, this);
 
-        vs.inputEnabled = true;
-        vs.events.onInputDown.add(this.eventVs, this);
     },
+    cheang3: function() {
 
+        this.choice.destroy();
+
+        this.choice3 = game.add.group();
+
+        var s3 = this.choice3.create(150, game.world.height - 70, 'S3');
+        var b3 = this.choice3.create(270, game.world.height - 70, 'B3');
+        var a3 = this.choice3.create(390, game.world.height - 70, 'A3');
+        var r3 = this.choice3.create(510, game.world.height - 70, 'R3');
+
+    },
+    cheang4: function() {
+
+        this.choice3.destroy();
+
+        this.choice4 = game.add.group();
+
+        var position = this.choice4.create(270, game.world.height - 70, 'position');
+        position.scale.setTo(0.65, 0.65);
+
+        var oxygen = this.choice4.create(390, game.world.height - 70, 'oxygen');
+        oxygen.scale.setTo(0.65, 0.65);
+
+        var med = this.choice4.create(510, game.world.height - 70, 'med');
+        med.scale.setTo(0.65, 0.65);
+
+    },
+    update: function() {
+        //game.physics.arcade.overlap(this.bar1, this.Abar, this.Bar1, null, this);
+        // if (checkOverlap(bar1, Abar)) {
+        //     console.log('warning')
+        // }
+        // if (checkOverlap(this.Abar, this.bar1)) {
+        //     console.log('WTFUCKKKKKKKKKKKKKKKKKKK');
+        // }
+
+    },
+    checkOverlap: function(spriteA, spriteB) {
+        var boundsA = spriteA.getBounds();
+        var boundsB = spriteB.getBounds();
+
+        return true; //Phaser.Rectangle.intersects(boundsA, boundsB);
+    },
+    Bar1: function() {
+        console.log('Point : 1 ');
+
+    },
     render: function() {
         // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
         if (timer.running) {
             game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 2, 14, "#ff0");
         } else {
-            startlogo.destroy();
+            var endlogo = game.add.sprite(game.world.centerX / 2, game.world.centerY / 2, 'end');
         }
     },
     endTimer: function() {
@@ -328,11 +500,11 @@ Stages.playGame.prototype = {
         var seconds = "0" + (s - minutes * 60);
         return minutes.substr(-2) + ":" + seconds.substr(-2);
     },
-
     eventNotify: function() {
 
     },
     eventPosition: function() {
+
         this.choiceP = game.add.group();
 
         var p1 = this.choiceP.create(game.world.width - 700, game.world.height - 200, 'p1');
@@ -364,6 +536,9 @@ Stages.playGame.prototype = {
 
 
     eventOxygen: function() {
+        // this.choiceP.destroy();
+        // this.choiceM.destroy();
+
         this.choiceO = game.add.group();
 
         var o1 = this.choiceO.create(game.world.width - 590, game.world.height - 260, 'o1');
@@ -405,51 +580,11 @@ Stages.playGame.prototype = {
         this.choiceO.destroy();
     },
 
-
-    eventIv: function() {
-        this.choiceI = game.add.group();
-
-        var i1 = this.choiceI.create(game.world.width - 450, game.world.height - 260, 'i1');
-        var i2 = this.choiceI.create(game.world.width - 450, game.world.height - 230, 'i2');
-        var i3 = this.choiceI.create(game.world.width - 450, game.world.height - 200, 'i3');
-        var i4 = this.choiceI.create(game.world.width - 450, game.world.height - 170, 'i4');
-        var i5 = this.choiceI.create(game.world.width - 450, game.world.height - 140, 'i5');
-        var cancleI = this.choiceI.create(game.world.width - 450, game.world.height - 110, 'cancleI');
-
-        i1.inputEnabled = true;
-        i1.events.onInputDown.add(this.i1, this);
-        i2.inputEnabled = true;
-        i2.events.onInputDown.add(this.i2, this);
-        i3.inputEnabled = true;
-        i3.events.onInputDown.add(this.i3, this);
-        i4.inputEnabled = true;
-        i4.events.onInputDown.add(this.i4, this);
-        i5.inputEnabled = true;
-        i5.events.onInputDown.add(this.i5, this);
-        cancleI.inputEnabled = true;
-        cancleI.events.onInputDown.add(this.canCleI, this);
-    },
-    i1: function() {
-        this.choiceI.destroy();
-    },
-    i2: function() {
-        this.choiceI.destroy();
-    },
-    i3: function() {
-        this.choiceI.destroy();
-    },
-    i4: function() {
-        this.choiceI.destroy();
-    },
-    i5: function() {
-        this.choiceI.destroy();
-    },
-    canCleI: function() {
-        this.choiceI.destroy();
-    },
-
-
     eventMed: function() {
+
+        // this.choiceP.destroy();
+        // this.choiceO.destroy();
+
         this.choiceM = game.add.group();
 
         var m1 = this.choiceM.create(game.world.width - 370, game.world.height - 260, 'm1');
@@ -491,44 +626,6 @@ Stages.playGame.prototype = {
         this.choiceM.destroy();
     },
 
-
-    eventVs: function() {
-        this.choiceV = game.add.group();
-
-        var v1 = this.choiceV.create(game.world.width - 220, game.world.height - 230, 'v1');
-        var v2 = this.choiceV.create(game.world.width - 220, game.world.height - 200, 'v2');
-        var v3 = this.choiceV.create(game.world.width - 220, game.world.height - 170, 'v3');
-        var v4 = this.choiceV.create(game.world.width - 220, game.world.height - 140, 'v4');
-        var cancleV = this.choiceV.create(game.world.width - 220, game.world.height - 110, 'cancleV');
-
-        v1.inputEnabled = true;
-        v1.events.onInputDown.add(this.v1, this);
-        v2.inputEnabled = true;
-        v2.events.onInputDown.add(this.v2, this);
-        v3.inputEnabled = true;
-        v3.events.onInputDown.add(this.v3, this);
-        v4.inputEnabled = true;
-        v4.events.onInputDown.add(this.v4, this);
-        cancleV.inputEnabled = true;
-        cancleV.events.onInputDown.add(this.canCleV, this);
-    },
-    v1: function() {
-        this.choiceV.destroy();
-    },
-    v2: function() {
-        this.choiceV.destroy();
-    },
-    v3: function() {
-        this.choiceV.destroy();
-    },
-    v4: function() {
-        this.choiceV.destroy();
-    },
-    canCleV: function() {
-        this.choiceV.destroy();
-    },
-
-
 };
 
 
@@ -536,6 +633,12 @@ var scaleNextW = 750;
 var scaleBackW = 710;
 var scaleNextH = 400;
 var scaleBackH = 360;
+
+var Abar, Bbar, Cbar, Dbar, Ebar;
+var bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10, bar11, bar12, bar13, bar14, bar15;
+var awserD;
+
+var count = '0';
 
 var timer, timerEvent, text;
 
