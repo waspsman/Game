@@ -213,7 +213,7 @@ Stages.copd4.prototype = {
 //##################################Game#########################################
 
 Stages.playGame = function(game) {
-
+    var score;
 };
 
 Stages.playGame.prototype = {
@@ -306,6 +306,13 @@ Stages.playGame.prototype = {
 
         timer.start();
 
+        score = game.add.text(820, 35, number.score, {
+            //font: "20px",
+            fill: "#fff",
+            align: "center"
+        });
+
+        score.anchor.setTo(0.5, 0.5);
 
         var btnNext = game.add.sprite(scaleNextW, scaleNextH, 'next');
         btnNext.inputEnabled = true;
@@ -340,47 +347,182 @@ Stages.playGame.prototype = {
 
         bar1.inputEnabled = true;
         bar1.input.enableDrag();
-        bar1.events.onDragStop.add(this.onDragStop, this);
+        bar1.events.onDragStop.add(this.onDragStop1, this);
         bar2.inputEnabled = true;
         bar2.input.enableDrag();
+        bar2.events.onDragStop.add(this.onDragStop2, this);
         bar3.inputEnabled = true;
         bar3.input.enableDrag();
+        bar3.events.onDragStop.add(this.onDragStop3, this);
         bar4.inputEnabled = true;
         bar4.input.enableDrag();
+        bar4.events.onDragStop.add(this.onDragStop4, this);
         bar5.inputEnabled = true;
         bar5.input.enableDrag();
+        bar5.events.onDragStop.add(this.onDragStop5, this);
         bar6.inputEnabled = true;
         bar6.input.enableDrag();
+        bar6.events.onDragStop.add(this.onDragStop6, this);
         bar7.inputEnabled = true;
         bar7.input.enableDrag();
+        bar7.events.onDragStop.add(this.onDragStop7, this);
         bar8.inputEnabled = true;
         bar8.input.enableDrag();
+        bar8.events.onDragStop.add(this.onDragStop8, this);
         bar9.inputEnabled = true;
         bar9.input.enableDrag();
+        bar9.events.onDragStop.add(this.onDragStop9, this);
         bar10.inputEnabled = true;
         bar10.input.enableDrag();
+        bar10.events.onDragStop.add(this.onDragStop10, this);
         bar11.inputEnabled = true;
         bar11.input.enableDrag();
+        bar11.events.onDragStop.add(this.onDragStop11, this);
         bar12.inputEnabled = true;
         bar12.input.enableDrag();
+        bar12.events.onDragStop.add(this.onDragStop12, this);
         bar13.inputEnabled = true;
         bar13.input.enableDrag();
+        bar13.events.onDragStop.add(this.onDragStop13, this);
         bar14.inputEnabled = true;
         bar14.input.enableDrag();
+        bar14.events.onDragStop.add(this.onDragStop14, this);
         bar15.inputEnabled = true;
         bar15.input.enableDrag();
+        bar15.events.onDragStop.add(this.onDragStop15, this);
 
         //bar1.events.onDragStop.add(onDragStop, this);
         //game.physics.arcade.enable([this.bar1, this.Abar], Phaser.Physics.ARCADE);
 
 
     },
-    onDragStop: function() {
-        //console.log('eieieiei');
-        if (this.checkOverlap(Abar, bar1)) {
-            console.log('eieieiei');
+    onDragStop1: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar1.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar1.destroy();
+            //console.log(awserD);
+        } else {
+            bar1.destroy();
+            bar1 = this.choiceBar.create(70, game.world.height - 140, 'bar1');
+            bar1.inputEnabled = true;
+            bar1.input.enableDrag();
+            bar1.events.onDragStop.add(this.onDragStop1, this);
         }
     },
+    onDragStop2: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar2.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar2.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop3: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar3.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar3.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop4: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar4.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar4.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop5: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar5.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar5.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop6: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar6.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar6.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop7: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar7.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar7.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop8: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar8.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar8.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop9: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar9.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar9.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop10: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar10.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar10.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop11: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar11.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar11.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop12: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar12.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar12.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop13: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar13.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar13.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop14: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar14.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar14.destroy();
+            //console.log(awserD);
+        }
+    },
+    onDragStop15: function() {
+        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar15.getBounds())) {
+            number.score = number.score + 2;
+            score.setText(number.score);
+            bar15.destroy();
+            //console.log(awserD);
+        }
+    },
+
     rmStart: function(logo) {
         startlogo.destroy();
 
@@ -418,6 +560,16 @@ Stages.playGame.prototype = {
         var med = this.choice.create(510, game.world.height - 70, 'med');
         med.scale.setTo(0.65, 0.65);
 
+        var w, h;
+        w = 15;
+        h = 20;
+        awserD.forEach(function(D) {
+            game.add.text(w, h, D, {
+                font: "14px",
+                fill: "#d50000",
+            });
+            h += 15;
+        }, this);
 
 
         //add event
@@ -463,23 +615,6 @@ Stages.playGame.prototype = {
 
     },
     update: function() {
-        //game.physics.arcade.overlap(this.bar1, this.Abar, this.Bar1, null, this);
-        // if (checkOverlap(bar1, Abar)) {
-        //     console.log('warning')
-        // }
-        // if (checkOverlap(this.Abar, this.bar1)) {
-        //     console.log('WTFUCKKKKKKKKKKKKKKKKKKK');
-        // }
-
-    },
-    checkOverlap: function(spriteA, spriteB) {
-        var boundsA = spriteA.getBounds();
-        var boundsB = spriteB.getBounds();
-
-        return true; //Phaser.Rectangle.intersects(boundsA, boundsB);
-    },
-    Bar1: function() {
-        console.log('Point : 1 ');
 
     },
     render: function() {
@@ -636,7 +771,9 @@ var scaleBackH = 360;
 
 var Abar, Bbar, Cbar, Dbar, Ebar;
 var bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10, bar11, bar12, bar13, bar14, bar15;
-var awserD;
+var awserD = [];
+
+var number = { score: 0 };
 
 var count = '0';
 
