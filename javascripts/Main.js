@@ -397,10 +397,11 @@ Stages.playGame.prototype = {
 
     },
     onDragStop1: function() {
-        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar1.getBounds())) {
+        if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar1.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
             bar1.destroy();
+            awserD.push('BP 130/80 mmHg');
             //console.log(awserD);
         } else {
             bar1.destroy();
@@ -416,22 +417,42 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar2.destroy();
             //console.log(awserD);
+        } else {
+            bar2.destroy();
+            bar2 = this.choiceBar.create(120, game.world.height - 140, 'bar2');
+            bar2.inputEnabled = true;
+            bar2.input.enableDrag();
+            bar2.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop3: function() {
-        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar3.getBounds())) {
+        if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar3.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
             bar3.destroy();
+            awserD.push('37.8 C');
             //console.log(awserD);
+        } else {
+            bar3.destroy();
+            bar3 = this.choiceBar.create(170, game.world.height - 140, 'bar3');
+            bar3.inputEnabled = true;
+            bar3.input.enableDrag();
+            bar3.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop4: function() {
-        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar4.getBounds())) {
+        if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar4.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
             bar4.destroy();
+            awserD.push('Oxygen saturation 94%');
             //console.log(awserD);
+        } else {
+            bar4.destroy();
+            bar4 = this.choiceBar.create(220, game.world.height - 140, 'bar4');
+            bar4.inputEnabled = true;
+            bar4.input.enableDrag();
+            bar4.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop5: function() {
@@ -440,14 +461,26 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar5.destroy();
             //console.log(awserD);
+        } else {
+            bar5.destroy();
+            bar5 = this.choiceBar.create(270, game.world.height - 140, 'bar5');
+            bar5.inputEnabled = true;
+            bar5.input.enableDrag();
+            bar5.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop6: function() {
-        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar6.getBounds())) {
+        if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar6.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
             bar6.destroy();
             //console.log(awserD);
+        } else {
+            bar6.destroy();
+            bar6 = this.choiceBar.create(320, game.world.height - 140, 'bar6');
+            bar6.inputEnabled = true;
+            bar6.input.enableDrag();
+            bar6.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop7: function() {
@@ -456,6 +489,12 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar7.destroy();
             //console.log(awserD);
+        } else {
+            bar7.destroy();
+            bar7 = this.choiceBar.create(370, game.world.height - 140, 'bar7');
+            bar7.inputEnabled = true;
+            bar7.input.enableDrag();
+            bar7.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop8: function() {
@@ -464,22 +503,42 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar8.destroy();
             //console.log(awserD);
+        } else {
+            bar8.destroy();
+            bar8 = this.choiceBar.create(420, game.world.height - 140, 'bar1');
+            bar8.inputEnabled = true;
+            bar8.input.enableDrag();
+            bar8.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop9: function() {
-        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar9.getBounds())) {
+        if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar9.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
             bar9.destroy();
+            awserD.push('Cappilary refill');
             //console.log(awserD);
+        } else {
+            bar9.destroy();
+            bar9 = this.choiceBar.create(470, game.world.height - 140, 'bar8');
+            bar9.inputEnabled = true;
+            bar9.input.enableDrag();
+            bar9.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop10: function() {
-        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar10.getBounds())) {
+        if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar10.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
             bar10.destroy();
+            awserD.push('E4V5M5');
             //console.log(awserD);
+        } else {
+            bar10.destroy();
+            bar10 = this.choiceBar.create(520, game.world.height - 140, 'bar9');
+            bar10.inputEnabled = true;
+            bar10.input.enableDrag();
+            bar10.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop11: function() {
@@ -488,6 +547,12 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar11.destroy();
             //console.log(awserD);
+        } else {
+            bar11.destroy();
+            bar11 = this.choiceBar.create(570, game.world.height - 140, 'bar6');
+            bar11.inputEnabled = true;
+            bar11.input.enableDrag();
+            bar11.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop12: function() {
@@ -496,6 +561,12 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar12.destroy();
             //console.log(awserD);
+        } else {
+            bar12.destroy();
+            bar12 = this.choiceBar.create(620, game.world.height - 140, 'bar10');
+            bar12.inputEnabled = true;
+            bar12.input.enableDrag();
+            bar12.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop13: function() {
@@ -504,6 +575,12 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar13.destroy();
             //console.log(awserD);
+        } else {
+            bar13.destroy();
+            bar13 = this.choiceBar.create(670, game.world.height - 140, 'bar11');
+            bar13.inputEnabled = true;
+            bar13.input.enableDrag();
+            bar13.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop14: function() {
@@ -512,6 +589,12 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar14.destroy();
             //console.log(awserD);
+        } else {
+            bar14.destroy();
+            bar14 = this.choiceBar.create(720, game.world.height - 140, 'bar12');
+            bar14.inputEnabled = true;
+            bar14.input.enableDrag();
+            bar14.events.onDragStop.add(this.onDragStop1, this);
         }
     },
     onDragStop15: function() {
@@ -520,6 +603,12 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar15.destroy();
             //console.log(awserD);
+        } else {
+            bar15.destroy();
+            bar15 = this.choiceBar.create(770, game.world.height - 140, 'bar6');
+            bar15.inputEnabled = true;
+            bar15.input.enableDrag();
+            bar15.events.onDragStop.add(this.onDragStop1, this);
         }
     },
 
@@ -568,7 +657,7 @@ Stages.playGame.prototype = {
                 font: "14px",
                 fill: "#d50000",
             });
-            h += 15;
+            h += 20;
         }, this);
 
 
