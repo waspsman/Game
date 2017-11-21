@@ -168,7 +168,7 @@ Stages.copd6.prototype = {
         this.state.start('copd5');
     },
     more: function() {
-        window.open("http://www.google.com");
+        window.open("https://github.com/supertodtor/Game/raw/develop/%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%A3%E0%B8%B9%E0%B9%89%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%9B%E0%B8%AD%E0%B8%94%E0%B8%AD%E0%B8%B8%E0%B8%94%E0%B8%81%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%A3%E0%B8%B1%E0%B8%87.pdf");
     }
 };
 
@@ -409,7 +409,7 @@ Stages.playGame.prototype = {
         if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar2.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
-            awserD.push('37.8 C');
+            awserD.push('อุณหภูมิกาย 37.2 C');
             bar2.destroy();
             //console.log(awserD);
         } else {
@@ -533,7 +533,7 @@ Stages.playGame.prototype = {
         if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar11.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
-            awserD.push('E4V5M5');
+            awserD.push('รู้สึกตัวดี');
             bar11.destroy();
             console.log(awserD);
         } else {
@@ -1298,7 +1298,7 @@ Stages.copd8.prototype = {
         more.events.onInputDown.add(this.more, this);
     },
     more: function() {
-        window.open("http://www.google.com");
+        window.open("https://github.com/supertodtor/Game/raw/develop/%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%A3%E0%B8%B9%E0%B9%89%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%9B%E0%B8%AD%E0%B8%94%E0%B8%AD%E0%B8%B8%E0%B8%94%E0%B8%81%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%A3%E0%B8%B1%E0%B8%87.pdf");
     },
     btnN: function() {
         this.state.start('copd1');
