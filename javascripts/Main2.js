@@ -214,7 +214,7 @@ Stages.playGame = function(game) {
     var warning1, warning2;
     var mediecation2, recomend2, vs2;
     var m1, m2, m3, cancelM;
-    var info, finish;
+    var info, finish, people;
 
 };
 Stages.playGame.prototype = {
@@ -234,6 +234,8 @@ Stages.playGame.prototype = {
         game.load.image('recomend', './photo/recomend.png')
         game.load.image('info', './photo/info.png');
         game.load.image('finish', './photo/finish.png');
+        gaem.load.image('people1', './photo/people1.png');
+        game.load.image('people2', './photo/people2.png')
 
 
         game.load.image('bar', './photo/bar.png');
@@ -291,6 +293,7 @@ Stages.playGame.prototype = {
     },
     create: function() {
         game.add.sprite(0, 0, 'bg');
+        people = game.add.sprite(500, 250, 'people1');
         //game.add.sprite(0, 60, 'board');
 
         startlogo = game.add.sprite(450, 250, 'startlogo')
@@ -640,15 +643,15 @@ Stages.playGame.prototype = {
         game.add.sprite(0, 50, 'board');
 
         this.choice = game.add.group();
-        notify1 = this.choice.create(200, game.world.height - 70, 'notify');
+        notify1 = this.choice.create(600, game.world.height - 70, 'notify');
         notify1.scale.setTo(0.65, 0.65);
-        position1 = this.choice.create(400, game.world.height - 70, 'position');
+        position1 = this.choice.create(200, game.world.height - 70, 'position');
         position1.scale.setTo(0.65, 0.65);
-        oxygen1 = this.choice.create(600, game.world.height - 70, 'oxygen');
+        oxygen1 = this.choice.create(400, game.world.height - 70, 'oxygen');
         oxygen1.scale.setTo(0.65, 0.65);
 
         notify1.inputEnabled = true;
-        notify1.events.onInputDown.add(this.notify1, this);
+        notify1.events.onInputDown.add(this.checkN, this);
         position1.inputEnabled = true;
         position1.events.onInputDown.add(this.position1, this);
         oxygen1.inputEnabled = true;
@@ -665,6 +668,11 @@ Stages.playGame.prototype = {
             h += 20;
         });
 
+    },
+    checkN: function() {
+        if (!(position1.inputEnabled && oxygen1.inputEnabled)) {
+            this.notify1();
+        }
     },
     notify1: function() {
         number.score += 10;
@@ -705,6 +713,7 @@ Stages.playGame.prototype = {
         this.choiceP.destroy();
     },
     p2: function() {
+        people = game.add.sprite(500, 250, 'people2');
         number.score += 10;
         score.setText(number.score);
         position1.inputEnabled = false;
@@ -802,7 +811,7 @@ Stages.playGame.prototype = {
         c4.events.onDragStop.add(this.onDragStopC4, this);
     },
     onDragStopC1: function() {
-        if (Phaser.Rectangle.intersects(c1.getBounds(), s3.getBounds())) {
+        if (Phaser.Rectangle.intersects(c1.getBounds(), r3.getBounds())) {
             c1.destroy();
             checkC++;
             cCheck.c1 = true;
@@ -821,7 +830,7 @@ Stages.playGame.prototype = {
             if (cCheck.c1 && cCheck.c2 && cCheck.c3 && cCheck.c4) {
                 this.checkWarning();
             }
-        } else if (Phaser.Rectangle.intersects(c1.getBounds(), r3.getBounds())) {
+        } else if (Phaser.Rectangle.intersects(c1.getBounds(), s3.getBounds())) {
             c1.destroy();
             cCheck.c1 = true;
             if (cCheck.c1 && cCheck.c2 && cCheck.c3 && cCheck.c4) {
@@ -905,14 +914,14 @@ Stages.playGame.prototype = {
         }
     },
     onDragStopC4: function() {
-        if (Phaser.Rectangle.intersects(c4.getBounds(), r3.getBounds())) {
+        if (Phaser.Rectangle.intersects(c4.getBounds(), s3.getBounds())) {
             c4.destroy();
             checkC++;
             cCheck.c4 = true;
             if (cCheck.c1 && cCheck.c2 && cCheck.c3 && cCheck.c4) {
                 this.checkWarning();
             }
-        } else if (Phaser.Rectangle.intersects(c4.getBounds(), s3.getBounds())) {
+        } else if (Phaser.Rectangle.intersects(c4.getBounds(), r3.getBounds())) {
             c4.destroy();
             cCheck.c4 = true;
             if (cCheck.c1 && cCheck.c2 && cCheck.c3 && cCheck.c4) {
@@ -975,12 +984,8 @@ Stages.playGame.prototype = {
             c = 1;
             console.log(c);
             if (checkC == 3) {
-                number.score += 75;
-                score.setText(number.score);
                 this.game4();
             } else if (checkC == 4) {
-                number.score += 100;
-                score.setText(number.score);
                 this.game4();
             } else {
                 this.warning();
@@ -990,15 +995,7 @@ Stages.playGame.prototype = {
             warning2.anchor.x = 0.5;
             warning2.anchor.y = 0.5;
             warning2.inputEnabled = true;
-            number.rate = 102
-            number.rr = 36;
-            number.sat = '87%';
-            number.bp = '150/90';
-            rate.setText(number.rate);
-            rr.setText(number.rr);
-            sat.setText(number.sat);
-            bp.setText(number.bp);
-            warning2.events.onInputDown.add(this.game4, this);
+            warning2.events.onInputDown.add(this.finish, this);
         }
     },
     game4: function() {
