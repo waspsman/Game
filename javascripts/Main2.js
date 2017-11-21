@@ -205,7 +205,7 @@ Stages.playGame = function(game) {
     var bar, bar1, bar2, bar3, bar4, bar5, bar6, bar7, bar8, bar9, bar10, bar11, bar12, bar13, bar14;
     var Abar, Bbar, Cbar, Dbar, Ebar;
     var notify1, position1, oxygen1;
-    var p1, p2, p3, canleP;
+    var p1, p2, p3, canCleP;
     var o1, o2, o3, o4, cancleO;
     var l1, l2, l3, l4;
     var s3, b3, a3, r3;
@@ -214,7 +214,9 @@ Stages.playGame = function(game) {
     var warning1, warning2;
     var mediecation2, recomend2, vs2;
     var m1, m2, m3, cancelM;
-    var info, finish;
+    var info, finish, people, people1, people4, people5, people6, people7, people8, people10, people9;
+    var checkP2 = false;
+
 
 };
 Stages.playGame.prototype = {
@@ -234,7 +236,16 @@ Stages.playGame.prototype = {
         game.load.image('recomend', './photo/recomend.png')
         game.load.image('info', './photo/info.png');
         game.load.image('finish', './photo/finish.png');
-
+        game.load.image('people1', './photo/people1.png');
+        game.load.image('people2', './photo/people2.png');
+        game.load.image('people3', './photo/people3.png');
+        game.load.image('people4', './photo/people4.png');
+        game.load.image('people5', './photo/people5.png');
+        game.load.image('people6', './photo/people6.png');
+        game.load.image('people7', './photo/people7.png');
+        game.load.image('people8', './photo/people8.png');
+        game.load.image('people9', './photo/people9.png');
+        game.load.image('people10', './photo/people10.png');
 
         game.load.image('bar', './photo/bar.png');
         game.load.image('bar1', './photo/bar1.png');
@@ -291,6 +302,7 @@ Stages.playGame.prototype = {
     },
     create: function() {
         game.add.sprite(0, 0, 'bg');
+        people = game.add.sprite(470, 150, 'people3');
         //game.add.sprite(0, 60, 'board');
 
         startlogo = game.add.sprite(450, 250, 'startlogo')
@@ -326,7 +338,8 @@ Stages.playGame.prototype = {
         bar2 = this.bar.create(175, 250, 'bar2');
         bar3 = this.bar.create(265, 240, 'bar3');
         bar4 = this.bar.create(395, 250, 'bar4');
-        bar5 = this.bar.create(515, 250, 'bar5');
+        bar5 = this.bar.create(515, 240, 'bar5');
+        bar5.scale.setTo(0.9, 0.9);
         bar6 = this.bar.create(655, 235, 'bar6');
         bar7 = this.bar.create(765, 240, 'bar7');
         bar8 = this.bar.create(65, 320, 'bar8');
@@ -384,19 +397,13 @@ Stages.playGame.prototype = {
 
     },
     onDragStop1: function() {
-        if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar1.getBounds())) {
-            //number.score = number.score + 2;
-            score.setText(number.score);
-            bar1.destroy();
-            //awserD.push('BP 130/80 mmHg');
-            //console.log(awserD);
-        } else {
-            bar1.destroy();
-            bar1 = this.bar.create(0, 0, 'bar1');
-            bar1.inputEnabled = true;
-            bar1.input.enableDrag();
-            bar1.events.onDragStop.add(this.onDragStop1, this);
-        }
+
+        bar1.destroy();
+        bar1 = this.bar.create(65, 250, 'bar1');
+        bar1.inputEnabled = true;
+        bar1.input.enableDrag();
+        bar1.events.onDragStop.add(this.onDragStop1, this);
+
     },
     onDragStop2: function() {
         if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar2.getBounds())) {
@@ -429,19 +436,13 @@ Stages.playGame.prototype = {
         }
     },
     onDragStop4: function() {
-        if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar4.getBounds())) {
-            //number.score = number.score + 2;
-            score.setText(number.score);
-            bar4.destroy();
-            //awserD.push('Oxygen saturation 94%');
-            //console.log(awserD);
-        } else {
-            bar4.destroy();
-            bar4 = this.bar.create(220, game.world.height - 140, 'bar4');
-            bar4.inputEnabled = true;
-            bar4.input.enableDrag();
-            bar4.events.onDragStop.add(this.onDragStop4, this);
-        }
+
+        bar4.destroy();
+        bar4 = this.bar.create(395, 250, 'bar4');
+        bar4.inputEnabled = true;
+        bar4.input.enableDrag();
+        bar4.events.onDragStop.add(this.onDragStop4, this);
+
     },
     onDragStop5: function() {
         if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar5.getBounds())) {
@@ -452,7 +453,8 @@ Stages.playGame.prototype = {
             //console.log(awserD);
         } else {
             bar5.destroy();
-            bar5 = this.bar.create(515, 250, 'bar5');
+            bar5 = this.bar.create(515, 240, 'bar5');
+            bar5.scale.setTo(0.9, 0.9);
             bar5.inputEnabled = true;
             bar5.input.enableDrag();
             bar5.events.onDragStop.add(this.onDragStop5, this);
@@ -462,7 +464,7 @@ Stages.playGame.prototype = {
         if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar6.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
-            awserD.push('Respiratory rate 30 bpm');
+            awserD.push('อัตราการหายใจ 32/นาที');
             bar6.destroy();
             console.log(awserD);
         } else {
@@ -477,7 +479,7 @@ Stages.playGame.prototype = {
         if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar7.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
-            awserD.push('wheezing');
+            awserD.push('ฟังปอดพบ wheezing');
             bar7.destroy();
             console.log(awserD);
         } else {
@@ -493,6 +495,7 @@ Stages.playGame.prototype = {
             number.score = number.score + 2;
             score.setText(number.score);
             bar8.destroy();
+            awserD.push('ไม่มีสิ่งอุดกั้น');
             //console.log(awserD);
         } else {
             bar8.destroy();
@@ -503,26 +506,20 @@ Stages.playGame.prototype = {
         }
     },
     onDragStop9: function() {
-        if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar9.getBounds())) {
-            //number.score = number.score + 2;
-            score.setText(number.score);
-            bar9.destroy();
-            //awserD.push('Cappilary refill');
-            //console.log(awserD);
-        } else {
-            bar9.destroy();
-            bar9 = this.bar.create(470, game.world.height - 140, 'bar9');
-            bar9.inputEnabled = true;
-            bar9.input.enableDrag();
-            bar9.events.onDragStop.add(this.onDragStop9, this);
-        }
+
+        bar9.destroy();
+        bar9 = this.bar.create(185, 320, 'bar9');
+        bar9.inputEnabled = true;
+        bar9.input.enableDrag();
+        bar9.events.onDragStop.add(this.onDragStop9, this);
+
     },
     onDragStop10: function() {
         if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar10.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
             bar10.destroy();
-            awserD.push('Cappilary refill');
+            awserD.push('Cappilary refill 1 วินาที');
             console.log(awserD);
         } else {
             bar10.destroy();
@@ -548,24 +545,20 @@ Stages.playGame.prototype = {
         }
     },
     onDragStop12: function() {
-        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar12.getBounds())) {
-            //number.score = number.score + 2;
-            score.setText(number.score);
-            bar12.destroy();
-            //console.log(awserD);
-        } else {
-            bar12.destroy();
-            bar12 = this.bar.create(620, game.world.height - 140, 'bar12');
-            bar12.inputEnabled = true;
-            bar12.input.enableDrag();
-            bar12.events.onDragStop.add(this.onDragStop12, this);
-        }
+
+        bar12.destroy();
+        bar12 = this.bar.create(515, 310, 'bar12');
+        bar12.scale.setTo(0.9, 0.9);
+        bar12.inputEnabled = true;
+        bar12.input.enableDrag();
+        bar12.events.onDragStop.add(this.onDragStop12, this);
+
     },
     onDragStop13: function() {
         if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar13.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
-            awserD.push('heart rate 96 bpm');
+            awserD.push('อัตราการเต้นของหัวใจ 96 ครั้ง/นาที');
             bar13.destroy();
             console.log(awserD);
         } else {
@@ -577,18 +570,14 @@ Stages.playGame.prototype = {
         }
     },
     onDragStop14: function() {
-        if (Phaser.Rectangle.intersects(Abar.getBounds(), bar14.getBounds())) {
-            //number.score = number.score + 2;
-            score.setText(number.score);
-            bar14.destroy();
-            //console.log(awserD);
-        } else {
-            bar14.destroy();
-            bar14 = this.bar.create(720, game.world.height - 140, 'bar14');
-            bar14.inputEnabled = true;
-            bar14.input.enableDrag();
-            bar14.events.onDragStop.add(this.onDragStop14, this);
-        }
+
+        bar14.destroy();
+        bar14 = this.bar.create(765, 320, 'bar14');
+        bar14.scale.setTo(0.8, 0.8);
+        bar14.inputEnabled = true;
+        bar14.input.enableDrag();
+        bar14.events.onDragStop.add(this.onDragStop14, this);
+
     },
     nextPage: function() {
         this.state.start('copd8');
@@ -597,7 +586,7 @@ Stages.playGame.prototype = {
     render: function() {
         // If our timer is running, show the time in a nicely formatted way, else show 'Done!'
         if (timer.running) {
-            game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 20, 30, '#ffffff', '30px');
+            game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 65, 50, '#000', '30px');
         } else {
             endlogo = game.add.sprite(450, 250, 'end');
             endlogo.anchor.x = 0.5;
@@ -637,34 +626,45 @@ Stages.playGame.prototype = {
         sat = game.add.text(780, 100, number.sat, { fill: '#ffffff', fontSize: '20px' });
         bp = game.add.text(720, 130, number.bp, { fill: '#ffffff', fontSize: '20px' });
         t = game.add.text(720, 160, number.t, { fill: '#ffffff', fontSize: '20px' });
-        game.add.sprite(0, 50, 'board');
+        this.boards = game.add.group();
+        board = this.boards.create(0, 80, 'board');
+
+        this.peoples = game.add.group();
+        this.peoples.add(people);
 
         this.choice = game.add.group();
-        notify1 = this.choice.create(200, game.world.height - 70, 'notify');
+        notify1 = this.choice.create(600, game.world.height - 70, 'notify');
         notify1.scale.setTo(0.65, 0.65);
-        position1 = this.choice.create(400, game.world.height - 70, 'position');
+        position1 = this.choice.create(200, game.world.height - 70, 'position');
         position1.scale.setTo(0.65, 0.65);
-        oxygen1 = this.choice.create(600, game.world.height - 70, 'oxygen');
+        oxygen1 = this.choice.create(400, game.world.height - 70, 'oxygen');
         oxygen1.scale.setTo(0.65, 0.65);
 
         notify1.inputEnabled = true;
-        notify1.events.onInputDown.add(this.notify1, this);
+        notify1.events.onInputDown.add(this.checkN, this);
         position1.inputEnabled = true;
         position1.events.onInputDown.add(this.position1, this);
         oxygen1.inputEnabled = true;
         oxygen1.events.onInputDown.add(this.oxygen1, this);
 
-        this.awserD = game.add.group();
+        //this.awsers = game.add.group();
         var w = 15;
-        var h = 60;
+        var h = 90;
         awserD.forEach(D => {
-            game.add.text(w, h, D, {
+            awser = game.add.text(w, h, D, {
                 font: "14px",
                 fill: "#d50000",
             });
+            this.boards.add(awser);
+
             h += 20;
         });
 
+    },
+    checkN: function() {
+        if (!(position1.inputEnabled || oxygen1.inputEnabled)) {
+            this.notify1();
+        }
     },
     notify1: function() {
         number.score += 10;
@@ -674,7 +674,7 @@ Stages.playGame.prototype = {
         number.bp = '130/80';
         number.t = 37.2;
         rr.setText(number.rr);
-
+        this.boards.destroy();
         this.game3();
     },
     position1: function() {
@@ -689,7 +689,7 @@ Stages.playGame.prototype = {
         p1 = this.choiceP.create(position1.centerX - 77, game.world.height - 200, 'p1');
         p2 = this.choiceP.create(position1.centerX - 77, game.world.height - 170, 'p2');
         p3 = this.choiceP.create(position1.centerX - 77, game.world.height - 140, 'p3');
-        canleP = this.choiceP.create(position1.centerX - 77, game.world.height - 110, 'cancleP');
+        cancleP = this.choiceP.create(position1.centerX - 77, game.world.height - 110, 'cancleP');
 
         p1.inputEnabled = true;
         p1.events.onInputDown.add(this.p1, this);
@@ -698,13 +698,17 @@ Stages.playGame.prototype = {
         p3.inputEnabled = true;
         p3.events.onInputDown.add(this.p3, this);
         cancleP.inputEnabled = true;
-        cancleP.events.onInputDown.add(this.canCleP, this);
+        cancleP.events.onInputDown.add(this.canCelP, this);
     },
     p1: function() {
         position1.inputEnabled = false;
         this.choiceP.destroy();
+        checkP2 = false;
     },
     p2: function() {
+        people.destroy();
+        checkP2 = true;
+        this.checkO();
         number.score += 10;
         score.setText(number.score);
         position1.inputEnabled = false;
@@ -713,9 +717,33 @@ Stages.playGame.prototype = {
     p3: function() {
         position1.inputEnabled = false;
         this.choiceP.destroy();
+        checkP2 = false;
     },
-    cancleP: function() {
+    canCelP: function() {
         this.choiceP.destroy();
+    },
+    checkO: function() {
+        if (!oxygen1.inputEnabled) {
+            people = game.add.sprite(440, 100, 'people2');
+            this.peoples.add(people);
+            if (checkO1) {
+                people6.destroy();
+                people1 = game.add.sprite(450, 120, 'people1');
+                this.peoples.add(people1);
+            } else if (checkO2) {
+                people7.destroy();
+                people4 = game.add.sprite(480, 120, 'people4');
+                this.peoples.add(people4);
+            } else if (checkO3) {
+                people8.destroy();
+                people5 = game.add.sprite(480, 120, 'people5');
+                this.peoples.add(people5);
+            }
+            console.log('eiei')
+        } else {
+            people = game.add.sprite(440, 100, 'people2');
+            this.peoples.add(people);
+        }
     },
     oxygen1: function() {
         if (this.choiceP) {
@@ -742,31 +770,86 @@ Stages.playGame.prototype = {
         o4.inputEnabled = true;
         o4.events.onInputDown.add(this.o4, this);
         cancleO.inputEnabled = true;
-        cancleO.events.onInputDown.add(this.canCleO, this);
+        cancleO.events.onInputDown.add(this.canCelO, this);
+    },
+    checkP: function() {
+        if (!position1.inputEnabled) {
+            if (checkP2) {
+                people5 = game.add.sprite(480, 120, 'people5');
+                checkO3 = true;
+                this.peoples.add(people5);
+            } else {
+                people8 = game.add.sprite(490, 150, 'people8');
+                checkO3 = true;
+                this.peoples.add(people8);
+            }
+        } else {
+            people8 = game.add.sprite(490, 150, 'people8');
+            checkO3 = true;
+            this.peoples.add(people8);
+        }
+        console.log(checkO3);
+
     },
     o1: function() {
+        if (!position1.inputEnabled) {
+            if (checkP2) {
+                people1 = game.add.sprite(450, 120, 'people1');
+                checkO1 = true;
+                this.peoples.add(people1);
+            } else {
+                people6 = game.add.sprite(450, 150, 'people6');
+                checkO1 = true;
+                this.peoples.add(people6);
+            }
+        } else {
+            people6 = game.add.sprite(450, 150, 'people6');
+            checkO1 = true;
+            this.peoples.add(people6);
+        }
+        console.log(checkO1);
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
     },
     o2: function() {
+        if (!position1.inputEnabled) {
+            if (checkP2) {
+                people4 = game.add.sprite(480, 120, 'people4');
+                checkO2 = true;
+                this.peoples.add(people4);
+            } else {
+                people7 = game.add.sprite(490, 150, 'people7');
+                checkO2 = true;
+                this.peoples.add(people7);
+            }
+        } else {
+            people7 = game.add.sprite(490, 150, 'people7');
+            checkO2 = true;
+            this.peoples.add(people7);
+        }
+        console.log(checkO2);
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
     },
     o3: function() {
+        this.checkP();
         number.score += 10;
         score.setText(number.score);
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
     },
     o4: function() {
+        this.checkP();
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
     },
-    cancleO: function() {
+    canCelO: function() {
         this.choiceO.destroy();
     },
     game3: function() {
         this.choice.destroy();
+        this.peoples.destroy();
+        people = game.add.sprite(470, 150, 'people3');
         this.choice3 = game.add.group();
 
         l1 = this.choice3.create(230, game.world.height - 350 - 10, 'L1');
@@ -802,7 +885,7 @@ Stages.playGame.prototype = {
         c4.events.onDragStop.add(this.onDragStopC4, this);
     },
     onDragStopC1: function() {
-        if (Phaser.Rectangle.intersects(c1.getBounds(), s3.getBounds())) {
+        if (Phaser.Rectangle.intersects(c1.getBounds(), r3.getBounds())) {
             c1.destroy();
             checkC++;
             cCheck.c1 = true;
@@ -821,7 +904,7 @@ Stages.playGame.prototype = {
             if (cCheck.c1 && cCheck.c2 && cCheck.c3 && cCheck.c4) {
                 this.checkWarning();
             }
-        } else if (Phaser.Rectangle.intersects(c1.getBounds(), r3.getBounds())) {
+        } else if (Phaser.Rectangle.intersects(c1.getBounds(), s3.getBounds())) {
             c1.destroy();
             cCheck.c1 = true;
             if (cCheck.c1 && cCheck.c2 && cCheck.c3 && cCheck.c4) {
@@ -905,14 +988,14 @@ Stages.playGame.prototype = {
         }
     },
     onDragStopC4: function() {
-        if (Phaser.Rectangle.intersects(c4.getBounds(), r3.getBounds())) {
+        if (Phaser.Rectangle.intersects(c4.getBounds(), s3.getBounds())) {
             c4.destroy();
             checkC++;
             cCheck.c4 = true;
             if (cCheck.c1 && cCheck.c2 && cCheck.c3 && cCheck.c4) {
                 this.checkWarning();
             }
-        } else if (Phaser.Rectangle.intersects(c4.getBounds(), s3.getBounds())) {
+        } else if (Phaser.Rectangle.intersects(c4.getBounds(), r3.getBounds())) {
             c4.destroy();
             cCheck.c4 = true;
             if (cCheck.c1 && cCheck.c2 && cCheck.c3 && cCheck.c4) {
@@ -975,12 +1058,8 @@ Stages.playGame.prototype = {
             c = 1;
             console.log(c);
             if (checkC == 3) {
-                number.score += 75;
-                score.setText(number.score);
                 this.game4();
             } else if (checkC == 4) {
-                number.score += 100;
-                score.setText(number.score);
                 this.game4();
             } else {
                 this.warning();
@@ -990,30 +1069,29 @@ Stages.playGame.prototype = {
             warning2.anchor.x = 0.5;
             warning2.anchor.y = 0.5;
             warning2.inputEnabled = true;
-            number.rate = 102
-            number.rr = 36;
-            number.sat = '87%';
-            number.bp = '150/90';
-            rate.setText(number.rate);
-            rr.setText(number.rr);
-            sat.setText(number.sat);
-            bp.setText(number.bp);
-            warning2.events.onInputDown.add(this.game4, this);
+            warning2.events.onInputDown.add(this.finish, this);
         }
     },
     game4: function() {
         this.choice3.destroy();
-        //awserD.destroy();
+        game.add.sprite(0, 80, 'board');
+        game.add.text(20, 90, 'แผนการรักษา', { fill: '#d50000', font: '20px' });
 
-        // var w = 15;
-        // var h = 60;
-        // plan.forEach(D => {
-        //     game.add.text(w, h, D, {
-        //         font: "14px",
-        //         fill: "#d50000",
-        //     });
-        //     h += 20;
-        // });
+        var w = 15;
+        var h = 130;
+        plan.forEach(D => {
+            game.add.text(w, h, D, {
+                font: "14px",
+                fill: "#000000",
+            })
+
+            h += 22;
+        });
+
+
+        this.peoples = game.add.group();
+        this.peoples.add(people);
+
         this.choice4 = game.add.group();
         mediecation2 = this.choice4.create(200 - 100, game.world.height - 70, 'mediecation');
         mediecation2.scale.setTo(0.65, 0.65);
@@ -1044,6 +1122,22 @@ Stages.playGame.prototype = {
     finish: function() {
         game.state.start('copd8');
     },
+    checkP2: function() {
+        if (!position1.inputEnabled) {
+            if (checkP2) {
+                people9 = game.add.sprite(470, 115, 'people9');
+                game.time.events.add(5000, this.rmPeople9, this, people9);
+            } else {
+                people9 = game.add.sprite(490, 150, 'people9');
+                game.time.events.add(5000, this.rmPeople9, this, people9);
+            }
+        } else {
+            people9 = game.add.sprite(490, 150, 'people9');
+            game.time.events.add(5000, this.rmPeople9, this, people9);
+        }
+        console.log(checkO3);
+
+    },
     mediecation2: function() {
         if (this.choiceP) {
             this.choiceP.destroy();
@@ -1059,6 +1153,7 @@ Stages.playGame.prototype = {
         m3 = this.choiceM.create(mediecation2.centerX - 110, game.world.height - 140, 'm3');
         cancleM = this.choiceM.create(mediecation2.centerX - 110, game.world.height - 110, 'cancelM');
 
+
         m1.inputEnabled = true;
         m1.events.onInputDown.add(this.m1, this);
         m2.inputEnabled = true;
@@ -1066,25 +1161,59 @@ Stages.playGame.prototype = {
         m3.inputEnabled = true;
         m3.events.onInputDown.add(this.m3, this);
         cancleM.inputEnabled = true;
-        cancleM.events.onInputDown.add(this.canCleM, this);
+        cancleM.events.onInputDown.add(this.cancelM, this);
     },
     m1: function() {
-        number.score += 4;
-        score.setText(number.score);
-        mediecation2.inputEnabled = false;
-        this.choiceM.destroy();
+        checkm1;
+        if (checkm1) {
+            this.checkP2();
+            number.score += 4;
+            score.setText(number.score);
+            m1.inputEnabled = false;
+            this.choiceM.destroy();
+            checkm1 = false;
+            if (!(checkm1 || checkm2 || checkm3)) {
+                mediecation2.inputEnabled = false;
+            }
+        }
+
     },
     m2: function() {
-        number.score += 4;
-        score.setText(number.score);
-        mediecation2.inputEnabled = false;
-        this.choiceM.destroy();
+        checkm2;
+        if (checkm2) {
+            this.checkP2();
+            number.score += 4;
+            score.setText(number.score);
+            m2.inputEnabled = false;
+            checkm2 = false;
+            this.choiceM.destroy();
+            if (!(checkm1 || checkm2 || checkm3)) {
+                mediecation2.inputEnabled = false;
+            }
+        }
     },
     m3: function() {
-        number.score += 4;
-        score.setText(number.score);
-        mediecation2.inputEnabled = false;
-        this.choiceM.destroy();
+        checkm3;
+        if (checkm3) {
+            number.score += 4;
+            score.setText(number.score);
+            m3.inputEnabled = false;
+            this.choiceM.destroy();
+            people10 = game.add.sprite(450, 150, 'people10');
+            game.time.events.add(5000, this.rmPeople10, this, people10);
+            checkm3 = false;
+            if (!(checkm1 || checkm2 || checkm3)) {
+                mediecation2.inputEnabled = false;
+            }
+        }
+    },
+    rmPeople9: function() {
+        people9.destroy();
+        console.log(mediecation2.inputEnabled)
+    },
+    rmPeople10: function() {
+        people10.destroy();
+        console.log(mediecation2.inputEnabled)
     },
     cancelM: function() {
         this.choiceM.destroy();
@@ -1113,26 +1242,28 @@ Stages.playGame.prototype = {
         this.choiceR.destroy();
     },
     vs2: function() {
-        if (this.choiceP) {
-            this.choiceP.destroy();
-        } else if (this.choiceO) {
-            this.choiceO.destroy();
-        } else if (this.choiceR) {
-            this.choiceR.destroy();
-        } else if (this.choiceM) {
-            this.choiceM.destroy();
+        if (!(mediecation2.inputEnabled || position1.inputEnabled || oxygen1.inputEnabled)) {
+            if (this.choiceP) {
+                this.choiceP.destroy();
+            } else if (this.choiceO) {
+                this.choiceO.destroy();
+            } else if (this.choiceR) {
+                this.choiceR.destroy();
+            } else if (this.choiceM) {
+                this.choiceM.destroy();
+            }
+            number.score += 10;
+            score.setText(number.score);
+            vs2.inputEnabled = false;
+            number.rate = 98
+            number.rr = 26;
+            number.sat = '95%';
+            number.bp = '120/80';
+            rate.setText(number.rate);
+            rr.setText(number.rr);
+            sat.setText(number.sat);
+            bp.setText(number.bp);
         }
-        number.score += 10;
-        score.setText(number.score);
-        vs2.inputEnabled = false;
-        number.rate = 98
-        number.rr = 26;
-        number.sat = '95%';
-        number.bp = '120/80';
-        rate.setText(number.rate);
-        rr.setText(number.rr);
-        sat.setText(number.sat);
-        bp.setText(number.bp);
     },
 };
 Stages.copd8 = function(game) {
@@ -1151,6 +1282,23 @@ Stages.copd8.prototype = {
         score.anchor.y = 0.5;
         btnN.inputEnabled = true;
         btnN.events.onInputDown.add(this.btnN, this);
+        if (number.score < 60) {
+            var text1 = game.add.text(450, 280, 'ควรปรับปรุง ทบทวนเนื้อหาใหม่', { fill: '#d50000', font: '20px' });
+            text1.anchor.x = 0.5;
+        } else if (number.score >= 60 && number.score < 80) {
+            var text2 = game.add.text(450, 280, 'ดี', { fill: '#d50000', font: '20px' });
+            text2.anchor.x = 0.5;
+        } else if (number.score >= 80) {
+            var text3 = game.add.text(450, 280, 'ดีเยี่ยม', { fill: '#d50000', font: '20px' });
+            text3.anchor.x = 0.5;
+        }
+        var more = game.add.text(450, 320, 'เรียนรู้เพิ่มเติม', { fill: '#ffffff', font: '20px' });
+        more.anchor.x = 0.5;
+        more.inputEnabled = true;
+        more.events.onInputDown.add(this.more, this);
+    },
+    more: function() {
+        window.open("http://www.google.com");
     },
     btnN: function() {
         this.state.start('copd1');
@@ -1167,14 +1315,21 @@ var scale = {
 
 var number = { score: 0, rate: 96, rr: 32, sat: '90%', bp: '130/80', t: 37.2 };
 var awserD = [];
-var plan = ['- O2 cannula 3 LPM Keep O2 sat > 92 %',
-    '- Berodual 1 NB 15 x 3 then 1 NB ทุก 2 ชม.',
-    '- Sulbutamol inhalation 1 NB ทุก 1 ชม.',
-    '- Dexamethazone 5 mg IV stat then ทุก 6 ชม'
+var plan = ['- O2 cannula 3 LPM ', 'Keep O2 sat > 92 %',
+    '- Berodual 1 NB 15 x 3 ', 'then 1 NB ทุก 2 ชม.',
+    '- Sulbutamol inhalation ', '1 NB ทุก 1 ชม.',
+    '- Dexamethazone 5 mg ', 'IV stat then ทุก 6 ชม'
 ];
 var checkC = 0;
 var c = 0;
+
 var cCheck = { c1: false, c2: false, c3: false, c4: false };
+var checkO1 = false;
+var checkO2 = false;
+var checkO3 = false;
+var checkm1 = true;
+var checkm2 = true;
+var checkm3 = true;
 
 var game = new Phaser.Game(900, 500, Phaser.AUTO, 'game');
 game.state.add('startgame', Stages.startGame);
