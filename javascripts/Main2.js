@@ -12,8 +12,8 @@ Stages.startGame.prototype = {
     create: function() {
         game.add.sprite(0, 0, 'start');
 
-        btnPlay = game.add.sprite(750, scale.scaleNextH, 'btnPlay');
-        btnPlay.scale.setTo(0.65, 0.65);
+        btnPlay = game.add.sprite(720, scale.scaleNextH - 10, 'btnPlay');
+        btnPlay.scale.setTo(0.9, 0.9);
 
         btnPlay.inputEnabled = true;
         btnPlay.events.onInputDown.add(this.btnPlay, this);
@@ -146,7 +146,7 @@ Stages.copd6.prototype = {
         btnN = game.add.sprite(scale.scaleNextW, scale.scaleNextH, 'btnN');
         btnB = game.add.sprite(scale.scaleBackW, scale.scaleBackH, 'btnB');
 
-        var text3 = this.add.text(70, 440, 'more COPD ...', {
+        var text3 = this.add.text(150, 440, 'เอกสารเพิ่มเติมประกอบเรื่องโรค COPD', {
             fill: "#ff5252 ",
             fontSize: '16px'
         });
@@ -208,6 +208,7 @@ Stages.playGame = function(game) {
     var p1, p2, p3, canCleP;
     var o1, o2, o3, o4, cancleO;
     var l1, l2, l3, l4;
+    var t1, t2, t3, t4;
     var s3, b3, a3, r3;
     var c1, c2, c3, c4;
     var rate, rr, sat, bp, t;
@@ -219,9 +220,13 @@ Stages.playGame = function(game) {
 =======
     var info, finish, people, people1, people4, people5, people6, people7, people8, people10, people9;
     var checkP2 = false;
+<<<<<<< HEAD
 
 >>>>>>> develop
 
+=======
+    var btnHome;
+>>>>>>> develop
 };
 Stages.playGame.prototype = {
     preload: function() {
@@ -311,6 +316,27 @@ Stages.playGame.prototype = {
 
     },
     create: function() {
+
+        var i = 0;
+        checkD.forEach(D => {
+            checkD[i] = false;
+            i++;
+        });
+        number = { score: 0, rate: 96, rr: 32, sat: '90%', bp: '130/80', t: 37.2 };
+        checkO1 = false;
+        checkO2 = false;
+        checkO3 = false;
+        checkm1 = true;
+        checkm2 = true;
+        checkm3 = true;
+        number.score = 0;
+        awserD = [];
+        cCheck = { c1: false, c2: false, c3: false, c4: false };
+        checkC = 0;
+        c = 0;
+        otherp = '';
+        otherp2 = '';
+        othero = '';
         game.add.sprite(0, 0, 'bg');
 <<<<<<< HEAD
         people = game.add.sprite(500, 250, 'people1');
@@ -334,9 +360,9 @@ Stages.playGame.prototype = {
     rmStart: function(logo) {
         startlogo.destroy();
 
-        btnCheang = game.add.sprite(scale.scaleNextW, scale.scaleNextH, 'btnN');
-        btnCheang.inputEnabled = true;
-        btnCheang.events.onInputDown.add(this.cheangGame, this);
+        // btnCheang = game.add.sprite(scale.scaleNextW, scale.scaleNextH, 'btnN');
+        // btnCheang.inputEnabled = true;
+        // btnCheang.events.onInputDown.add(this.cheangGame, this);
 
         this.awserBar = game.add.group();
         Abar = this.awserBar.create(100 - 40, game.world.height - 70, 'Abar');
@@ -410,14 +436,34 @@ Stages.playGame.prototype = {
         bar14.events.onDragStop.add(this.onDragStop14, this);
 
     },
+    checkDrag: function() {
+        if (checkD[0] && checkD[1] && checkD[2] && checkD[3] && checkD[4] && checkD[5] && checkD[6] && checkD[7] && checkD[8]) {
+            this.game2();
+        }
+    },
     onDragStop1: function() {
-
-        bar1.destroy();
-        bar1 = this.bar.create(65, 250, 'bar1');
-        bar1.inputEnabled = true;
-        bar1.input.enableDrag();
-        bar1.events.onDragStop.add(this.onDragStop1, this);
-
+        if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar1.getBounds())) {
+            bar1.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar1.getBounds())) {
+            bar1.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar1.getBounds())) {
+            bar1.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar1.getBounds())) {
+            bar1.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar1.getBounds())) {
+            bar1.destroy();
+            this.checkDrag();
+        } else {
+            bar1.destroy();
+            bar1 = this.bar.create(65, 250, 'bar1');
+            bar1.inputEnabled = true;
+            bar1.input.enableDrag();
+            bar1.events.onDragStop.add(this.onDragStop1, this);
+        }
     },
     onDragStop2: function() {
         if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar2.getBounds())) {
@@ -425,7 +471,25 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             awserD.push('อุณหภูมิกาย 37.2 C');
             bar2.destroy();
+            checkD[0] = true;
+            this.checkDrag();
             //console.log(awserD);
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar2.getBounds())) {
+            bar2.destroy();
+            checkD[0] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar2.getBounds())) {
+            bar2.destroy();
+            checkD[0] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar2.getBounds())) {
+            bar2.destroy();
+            checkD[0] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar2.getBounds())) {
+            bar2.destroy();
+            checkD[0] = true;
+            this.checkDrag();
         } else {
             bar2.destroy();
             bar2 = this.bar.create(175, 250, 'bar2');
@@ -439,8 +503,26 @@ Stages.playGame.prototype = {
             number.score = number.score + 2;
             score.setText(number.score);
             bar3.destroy();
-            awserD.push('Oxygen saturation 94%');
+            awserD.push('Oxygen saturation 90%');
+            checkD[1] = true;
+            this.checkDrag();
             //console.log(awserD);
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar3.getBounds())) {
+            bar3.destroy();
+            checkD[1] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar3.getBounds())) {
+            bar3.destroy();
+            checkD[1] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar3.getBounds())) {
+            bar3.destroy();
+            checkD[1] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar3.getBounds())) {
+            bar3.destroy();
+            checkD[1] = true;
+            this.checkDrag();
         } else {
             bar3.destroy();
             bar3 = this.bar.create(265, 240, 'bar3');
@@ -450,13 +532,28 @@ Stages.playGame.prototype = {
         }
     },
     onDragStop4: function() {
-
-        bar4.destroy();
-        bar4 = this.bar.create(395, 250, 'bar4');
-        bar4.inputEnabled = true;
-        bar4.input.enableDrag();
-        bar4.events.onDragStop.add(this.onDragStop4, this);
-
+        if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar4.getBounds())) {
+            bar4.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar4.getBounds())) {
+            bar4.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar4.getBounds())) {
+            bar4.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar4.getBounds())) {
+            bar4.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar4.getBounds())) {
+            bar4.destroy();
+            this.checkDrag();
+        } else {
+            bar4.destroy();
+            bar4 = this.bar.create(395, 250, 'bar4');
+            bar4.inputEnabled = true;
+            bar4.input.enableDrag();
+            bar4.events.onDragStop.add(this.onDragStop4, this);
+        }
     },
     onDragStop5: function() {
         if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar5.getBounds())) {
@@ -464,7 +561,25 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             awserD.push('BP 130/80 mmHg.');
             bar5.destroy();
+            checkD[2] = true;
+            this.checkDrag();
             //console.log(awserD);
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar5.getBounds())) {
+            bar5.destroy();
+            checkD[2] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar5.getBounds())) {
+            bar5.destroy();
+            checkD[2] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar5.getBounds())) {
+            bar5.destroy();
+            checkD[2] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar5.getBounds())) {
+            bar5.destroy();
+            checkD[2] = true;
+            this.checkDrag();
         } else {
             bar5.destroy();
             bar5 = this.bar.create(515, 240, 'bar5');
@@ -478,9 +593,26 @@ Stages.playGame.prototype = {
         if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar6.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
-            awserD.push('อัตราการหายใจ 32/นาที');
+            awserD.push('อัตราการหายใจ 32 bpm');
             bar6.destroy();
-            console.log(awserD);
+            checkD[3] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar6.getBounds())) {
+            bar6.destroy();
+            checkD[3] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar6.getBounds())) {
+            bar6.destroy();
+            checkD[3] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar6.getBounds())) {
+            bar6.destroy();
+            checkD[3] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar6.getBounds())) {
+            bar6.destroy();
+            checkD[3] = true;
+            this.checkDrag();
         } else {
             bar6.destroy();
             bar6 = this.bar.create(655, 235, 'bar6');
@@ -495,7 +627,24 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             awserD.push('ฟังปอดพบ wheezing');
             bar7.destroy();
-            console.log(awserD);
+            checkD[4] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar7.getBounds())) {
+            bar7.destroy();
+            checkD[4] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar7.getBounds())) {
+            bar7.destroy();
+            checkD[4] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar7.getBounds())) {
+            bar7.destroy();
+            checkD[4] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar7.getBounds())) {
+            bar7.destroy();
+            checkD[4] = true;
+            this.checkDrag();
         } else {
             bar7.destroy();
             bar7 = this.bar.create(765, 240, 'bar7');
@@ -510,7 +659,25 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar8.destroy();
             awserD.push('ไม่มีสิ่งอุดกั้น');
+            checkD[5] = true;
+            this.checkDrag();
             //console.log(awserD);
+        } else if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar8.getBounds())) {
+            bar8.destroy();
+            checkD[5] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar8.getBounds())) {
+            bar8.destroy();
+            checkD[5] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar8.getBounds())) {
+            bar8.destroy();
+            checkD[5] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar8.getBounds())) {
+            bar8.destroy();
+            checkD[5] = true;
+            this.checkDrag();
         } else {
             bar8.destroy();
             bar8 = this.bar.create(65, 320, 'bar8');
@@ -520,13 +687,28 @@ Stages.playGame.prototype = {
         }
     },
     onDragStop9: function() {
-
-        bar9.destroy();
-        bar9 = this.bar.create(185, 320, 'bar9');
-        bar9.inputEnabled = true;
-        bar9.input.enableDrag();
-        bar9.events.onDragStop.add(this.onDragStop9, this);
-
+        if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar9.getBounds())) {
+            bar9.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar9.getBounds())) {
+            bar9.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar9.getBounds())) {
+            bar9.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar9.getBounds())) {
+            bar9.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar9.getBounds())) {
+            bar9.destroy();
+            this.checkDrag();
+        } else {
+            bar9.destroy();
+            bar9 = this.bar.create(185, 320, 'bar9');
+            bar9.inputEnabled = true;
+            bar9.input.enableDrag();
+            bar9.events.onDragStop.add(this.onDragStop9, this);
+        }
     },
     onDragStop10: function() {
         if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar10.getBounds())) {
@@ -534,7 +716,24 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             bar10.destroy();
             awserD.push('Cappilary refill 1 วินาที');
-            console.log(awserD);
+            checkD[6] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar10.getBounds())) {
+            bar10.destroy();
+            checkD[6] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar10.getBounds())) {
+            bar10.destroy();
+            checkD[6] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar10.getBounds())) {
+            bar10.destroy();
+            checkD[6] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar10.getBounds())) {
+            bar10.destroy();
+            checkD[6] = true;
+            this.checkDrag();
         } else {
             bar10.destroy();
             bar10 = this.bar.create(275, 320, 'bar10');
@@ -549,7 +748,24 @@ Stages.playGame.prototype = {
             score.setText(number.score);
             awserD.push('รู้สึกตัวดี');
             bar11.destroy();
-            console.log(awserD);
+            checkD[7] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar11.getBounds())) {
+            bar11.destroy();
+            checkD[7] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar11.getBounds())) {
+            bar11.destroy();
+            checkD[7] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar11.getBounds())) {
+            bar11.destroy();
+            checkD[7] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar11.getBounds())) {
+            bar11.destroy();
+            checkD[7] = true;
+            this.checkDrag();
         } else {
             bar11.destroy();
             bar11 = this.bar.create(415, 320, 'bar11');
@@ -559,22 +775,54 @@ Stages.playGame.prototype = {
         }
     },
     onDragStop12: function() {
-
-        bar12.destroy();
-        bar12 = this.bar.create(515, 310, 'bar12');
-        bar12.scale.setTo(0.9, 0.9);
-        bar12.inputEnabled = true;
-        bar12.input.enableDrag();
-        bar12.events.onDragStop.add(this.onDragStop12, this);
-
+        if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar12.getBounds())) {
+            bar12.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar12.getBounds())) {
+            bar12.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar12.getBounds())) {
+            bar12.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar12.getBounds())) {
+            bar12.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar12.getBounds())) {
+            bar12.destroy();
+            this.checkDrag();
+        } else {
+            bar12.destroy();
+            bar12 = this.bar.create(515, 310, 'bar12');
+            bar12.scale.setTo(0.9, 0.9);
+            bar12.inputEnabled = true;
+            bar12.input.enableDrag();
+            bar12.events.onDragStop.add(this.onDragStop12, this);
+        }
     },
     onDragStop13: function() {
         if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar13.getBounds())) {
             number.score = number.score + 2;
             score.setText(number.score);
-            awserD.push('อัตราการเต้นของหัวใจ 96 ครั้ง/นาที');
+            awserD.push('อัตราการเต้นของหัวใจ 96 bpm');
             bar13.destroy();
-            console.log(awserD);
+            checkD[8] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar13.getBounds())) {
+            bar13.destroy();
+            checkD[8] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar13.getBounds())) {
+            bar13.destroy();
+            checkD[8] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar13.getBounds())) {
+            bar13.destroy();
+            checkD[8] = true;
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar13.getBounds())) {
+            bar13.destroy();
+            checkD[8] = true;
+            this.checkDrag();
         } else {
             bar13.destroy();
             bar13 = this.bar.create(645, 320, 'bar13');
@@ -584,14 +832,29 @@ Stages.playGame.prototype = {
         }
     },
     onDragStop14: function() {
-
-        bar14.destroy();
-        bar14 = this.bar.create(765, 320, 'bar14');
-        bar14.scale.setTo(0.8, 0.8);
-        bar14.inputEnabled = true;
-        bar14.input.enableDrag();
-        bar14.events.onDragStop.add(this.onDragStop14, this);
-
+        if (Phaser.Rectangle.intersects(Ebar.getBounds(), bar14.getBounds())) {
+            bar14.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Abar.getBounds(), bar14.getBounds())) {
+            bar14.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Bbar.getBounds(), bar14.getBounds())) {
+            bar14.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Cbar.getBounds(), bar14.getBounds())) {
+            bar14.destroy();
+            this.checkDrag();
+        } else if (Phaser.Rectangle.intersects(Dbar.getBounds(), bar14.getBounds())) {
+            bar14.destroy();
+            this.checkDrag();
+        } else {
+            bar14.destroy();
+            bar14 = this.bar.create(765, 320, 'bar14');
+            bar14.scale.setTo(0.8, 0.8);
+            bar14.inputEnabled = true;
+            bar14.input.enableDrag();
+            bar14.events.onDragStop.add(this.onDragStop14, this);
+        }
     },
     nextPage: function() {
         this.state.start('copd8');
@@ -618,22 +881,10 @@ Stages.playGame.prototype = {
         var seconds = "0" + (s - minutes * 60);
         return minutes.substr(-2) + ":" + seconds.substr(-2);
     },
-    cheangGame: function() {
-        var btnCheang = 0;
-        if (btnCheang == 0) {
-            this.game2();
-            btnCheang = 1;
-        } else if (btnCheang == 1) {
-            this.game3();
-            btnCheang = 2;
-        }
 
-
-    },
     game2: function() {
         this.bar.destroy();
         this.awserBar.destroy();
-        btnCheang.destroy();
 
         rate = game.add.text(830, 70, number.rate, { fill: '#ffffff', fontSize: '20px' });
         rr = game.add.text(720, 100, number.rr, { fill: '#ffffff', fontSize: '20px' });
@@ -688,7 +939,7 @@ Stages.playGame.prototype = {
         number.score += 10;
         score.setText(number.score);
         number.rr = 30;
-        number.sat = '92%';
+        sat.setText(number.sat);
         number.bp = '130/80';
         number.t = 37.2;
         rr.setText(number.rr);
@@ -722,6 +973,9 @@ Stages.playGame.prototype = {
         position1.inputEnabled = false;
         this.choiceP.destroy();
         checkP2 = false;
+        otherp = 'ท่านอนคว่ำ';
+        otherp2 = 'หลังให้ O2 sat เพิ่มขึ้นเป็น 90%';
+        other3 = ['ผู้ป่วยรู้สึกตัวดี อุณหภูมิกาย 37.2 องศาเซลเซียส อัตราการหายใจ 30 bpm เสียงหัวใจปกติ BP ', '130/80 mmHg ฟังปอดพบเสียง wheezing (bilateral) O2 sat เหลือ 90% ตอนนี้ได้ให้การ', 'พยาบาลจัด' + otherp + othero + otherp2]
     },
     p2: function() {
 <<<<<<< HEAD
@@ -735,11 +989,19 @@ Stages.playGame.prototype = {
         score.setText(number.score);
         position1.inputEnabled = false;
         this.choiceP.destroy();
+        number.sat = '92%';
+        otherp = 'ท่านอนศีรษะสูง';
+        otherp2 = 'หลังให้ O2 sat เพิ่มขึ้นเป็น 92%';
+        other3 = ['ผู้ป่วยรู้สึกตัวดี อุณหภูมิกาย 37.2 องศาเซลเซียส อัตราการหายใจ 30 bpm เสียงหัวใจปกติ BP ', '130/80 mmHg ฟังปอดพบเสียง wheezing (bilateral) O2 sat เหลือ 90% ตอนนี้ได้ให้การ', 'พยาบาลจัด' + otherp + othero + otherp2]
     },
     p3: function() {
         position1.inputEnabled = false;
         this.choiceP.destroy();
         checkP2 = false;
+        number.sat = '92%';
+        otherp = 'ท่านอนตะแคงกึ่งคว่ำ';
+        otherp2 = 'หลังให้ O2 sat เพิ่มขึ้นเป็น 92%';
+        other3 = ['ผู้ป่วยรู้สึกตัวดี อุณหภูมิกาย 37.2 องศาเซลเซียส อัตราการหายใจ 30 bpm เสียงหัวใจปกติ BP ', '130/80 mmHg ฟังปอดพบเสียง wheezing (bilateral) O2 sat เหลือ 90% ตอนนี้ได้ให้การ', 'พยาบาลจัด' + otherp + othero + otherp2]
     },
     canCelP: function() {
         this.choiceP.destroy();
@@ -832,6 +1094,12 @@ Stages.playGame.prototype = {
         console.log(checkO1);
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
+        number.rr = 36;
+        number.sat = '87%';
+        number.bp = '150/90';
+        number.rate = 102;
+        othero = 'และให้ O2 mask with bag';
+        other3 = ['ผู้ป่วยรู้สึกตัวดี อุณหภูมิกาย 37.2 องศาเซลเซียส อัตราการหายใจ 30 bpm เสียงหัวใจปกติ BP ', '130/80 mmHg ฟังปอดพบเสียง wheezing (bilateral) O2 sat เหลือ 90% ตอนนี้ได้ให้การ', 'พยาบาลจัด' + otherp + othero + otherp2]
     },
     o2: function() {
         if (!position1.inputEnabled) {
@@ -852,6 +1120,12 @@ Stages.playGame.prototype = {
         console.log(checkO2);
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
+        number.rr = 36;
+        number.sat = '87%';
+        number.bp = '150/90';
+        number.rate = 102;
+        othero = 'และให้ Simple mask';
+        other3 = ['ผู้ป่วยรู้สึกตัวดี อุณหภูมิกาย 37.2 องศาเซลเซียส อัตราการหายใจ 30 bpm เสียงหัวใจปกติ BP ', '130/80 mmHg ฟังปอดพบเสียง wheezing (bilateral) O2 sat เหลือ 90% ตอนนี้ได้ให้การ', 'พยาบาลจัด' + otherp + othero + otherp2]
     },
     o3: function() {
         this.checkP();
@@ -859,11 +1133,23 @@ Stages.playGame.prototype = {
         score.setText(number.score);
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
+        number.rr = 26;
+        number.sat = '95%';
+        number.bp = '120/80';
+        number.rate = 98
+        othero = 'และให้ Oxygen Cannula 3 LPM';
+        other3 = ['ผู้ป่วยรู้สึกตัวดี อุณหภูมิกาย 37.2 องศาเซลเซียส อัตราการหายใจ 30 bpm เสียงหัวใจปกติ BP ', '130/80 mmHg ฟังปอดพบเสียง wheezing (bilateral) O2 sat เหลือ 90% ตอนนี้ได้ให้การ', 'พยาบาลจัด' + otherp + othero + otherp2]
     },
     o4: function() {
         this.checkP();
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
+        number.rr = 36;
+        number.sat = '87%';
+        number.bp = '150/90';
+        number.rate = 102;
+        othero = 'และให้ Oxygen Cannula 6 LPM';
+        other3 = ['ผู้ป่วยรู้สึกตัวดี อุณหภูมิกาย 37.2 องศาเซลเซียส อัตราการหายใจ 30 bpm เสียงหัวใจปกติ BP ', '130/80 mmHg ฟังปอดพบเสียง wheezing (bilateral) O2 sat เหลือ 90% ตอนนี้ได้ให้การ', 'พยาบาลจัด' + otherp + othero + otherp2]
     },
     canCelO: function() {
         this.choiceO.destroy();
@@ -874,24 +1160,66 @@ Stages.playGame.prototype = {
         people = game.add.sprite(470, 150, 'people3');
         this.choice3 = game.add.group();
 
-        l1 = this.choice3.create(230, game.world.height - 350 - 10, 'L1');
-        l2 = this.choice3.create(230, game.world.height - 280 - 25, 'L2');
-        l3 = this.choice3.create(230, game.world.height - 210 - 15, 'L3');
-        l4 = this.choice3.create(230, game.world.height - 140, 'L4');
-        l1.scale.setTo(0.8, 0.8);
-        l2.scale.setTo(0.8, 0.8);
-        l3.scale.setTo(0.75, 0.75);
-        l4.scale.setTo(0.8, 0.8);
+        l1 = this.choice3.create(230, 100 - 50, 'L1');
+        l2 = this.choice3.create(230, 175 - 50, 'L2');
+        l3 = this.choice3.create(230, 275 - 50, 'L3');
+        l4 = this.choice3.create(230, 390 - 50, 'L4');
+        // l1.scale.setTo(0.8, 0.8);
+        // l2.scale.setTo(0.8, 0.8);
+        // l3.scale.setTo(0.75, 0.75);
+        // l4.scale.setTo(0.8, 0.8);
+        var w = 235;
+        var h = 60;
+        other1.forEach(D => {
+            awser = game.add.text(w, h, D, {
+                font: "15px",
+                fill: "#000000",
+            });
+            this.choice3.add(awser);
+
+            h += 20;
+        });
+        h = 135;
+        other2.forEach(D => {
+            awser = game.add.text(w, h, D, {
+                font: "15px",
+                fill: "#000000",
+            });
+            this.choice3.add(awser);
+
+            h += 20;
+        });
+        h = 245;
+        other3.forEach(D => {
+            awser = game.add.text(w, h, D, {
+                font: "15px",
+                fill: "#000000",
+            });
+            this.choice3.add(awser);
+
+            h += 20;
+        });
+        h = 350;
+        other4.forEach(D => {
+            awser = game.add.text(w, h, D, {
+                font: "15px",
+                fill: "#000000",
+            });
+            this.choice3.add(awser);
+
+            h += 20;
+        });
+
 
         s3 = this.choice3.create(150, game.world.height - 70, 'S3');
         b3 = this.choice3.create(270, game.world.height - 70, 'B3');
         a3 = this.choice3.create(430, game.world.height - 70, 'A3');
         r3 = this.choice3.create(580, game.world.height - 70, 'R3');
 
-        c1 = this.choice3.create(150, game.world.height - 350 - 10, 'one');
-        c2 = this.choice3.create(150, game.world.height - 280 - 10, 'two');
-        c3 = this.choice3.create(150, game.world.height - 210 - 10, 'three');
-        c4 = this.choice3.create(150, game.world.height - 140, 'four');
+        c1 = this.choice3.create(150, 60, 'one');
+        c2 = this.choice3.create(150, 140, 'two');
+        c3 = this.choice3.create(150, 250, 'three');
+        c4 = this.choice3.create(150, 340, 'four');
 
         c1.inputEnabled = true;
         c1.input.enableDrag();
@@ -934,7 +1262,7 @@ Stages.playGame.prototype = {
             }
         } else {
             c1.destroy();
-            c1 = this.choice3.create(150, game.world.height - 350 - 10, 'one');
+            c1 = this.choice3.create(150, 60, 'one');
             c1.inputEnabled = true;
             c1.input.enableDrag();
             c1.events.onDragStop.add(this.onDragStopC1, this);
@@ -969,7 +1297,7 @@ Stages.playGame.prototype = {
             }
         } else {
             c2.destroy();
-            c2 = this.choice3.create(150, game.world.height - 280 - 10, 'two');
+            c2 = this.choice3.create(150, 140, 'two');
             c2.inputEnabled = true;
             c2.input.enableDrag();
             c2.events.onDragStop.add(this.onDragStopC2, this);
@@ -1003,7 +1331,7 @@ Stages.playGame.prototype = {
             }
         } else {
             c3.destroy();
-            c3 = this.choice3.create(150, game.world.height - 210 - 10, 'three');
+            c3 = this.choice3.create(150, 250, 'three');
             c3.inputEnabled = true;
             c3.input.enableDrag();
             c3.events.onDragStop.add(this.onDragStopC3, this);
@@ -1037,7 +1365,7 @@ Stages.playGame.prototype = {
             }
         } else {
             c4.destroy();
-            c4 = this.choice3.create(150, game.world.height - 140, 'four');
+            c4 = this.choice3.create(150, 340, 'four');
             c4.inputEnabled = true;
             c4.input.enableDrag();
             c4.events.onDragStop.add(this.onDragStopC4, this);
@@ -1056,10 +1384,10 @@ Stages.playGame.prototype = {
     rmWarning1: function() {
         warning1.destroy();
         checkC = 0;
-        c1 = this.choice3.create(150, game.world.height - 350 - 10, 'one');
-        c2 = this.choice3.create(150, game.world.height - 280 - 10, 'two');
-        c3 = this.choice3.create(150, game.world.height - 210 - 10, 'three');
-        c4 = this.choice3.create(150, game.world.height - 140, 'four');
+        c1 = this.choice3.create(150, 60, 'one');
+        c2 = this.choice3.create(150, 140, 'two');
+        c3 = this.choice3.create(150, 250, 'three');
+        c4 = this.choice3.create(150, 340, 'four');
 
         c1.inputEnabled = true;
         c1.input.enableDrag();
@@ -1097,7 +1425,7 @@ Stages.playGame.prototype = {
     game4: function() {
         this.choice3.destroy();
         game.add.sprite(0, 80, 'board');
-        game.add.text(20, 90, 'แผนการรักษา', { fill: '#d50000', font: '20px' });
+        game.add.text(20, 90, 'Treatment', { fill: '#d50000', font: '20px' });
 
         var w = 15;
         var h = 130;
@@ -1277,10 +1605,6 @@ Stages.playGame.prototype = {
             number.score += 10;
             score.setText(number.score);
             vs2.inputEnabled = false;
-            number.rate = 98
-            number.rr = 26;
-            number.sat = '95%';
-            number.bp = '120/80';
             rate.setText(number.rate);
             rr.setText(number.rr);
             sat.setText(number.sat);
@@ -1294,25 +1618,32 @@ Stages.copd8 = function(game) {
 Stages.copd8.prototype = {
     preload: function() {
         game.load.image('copd8', './photo/copd8.png');
-        game.load.image('btnN', './photo/Next.png')
+        game.load.image('btnN', './photo/Next.png');
+        game.load.image('btnHome', './photo/btnHome.png');
     },
     create: function() {
         game.add.sprite(0, 0, 'copd8');
-        btnN = game.add.sprite(scale.scaleNextW, scale.scaleNextH, 'btnN');
         score = this.add.text(450, 250, number.score, { fill: "#ffffff" });
         score.anchor.x = 0.5;
         score.anchor.y = 0.5;
-        btnN.inputEnabled = true;
-        btnN.events.onInputDown.add(this.btnN, this);
         if (number.score < 60) {
             var text1 = game.add.text(450, 280, 'ควรปรับปรุง ทบทวนเนื้อหาใหม่', { fill: '#d50000', font: '20px' });
             text1.anchor.x = 0.5;
+            btnHome = game.add.sprite(scale.scaleNextW, scale.scaleNextH, 'btnHome');
+            btnHome.inputEnabled = true;
+            btnHome.events.onInputDown.add(this.btnHome, this);
         } else if (number.score >= 60 && number.score < 80) {
             var text2 = game.add.text(450, 280, 'ดี', { fill: '#d50000', font: '20px' });
             text2.anchor.x = 0.5;
+            btnN = game.add.sprite(scale.scaleNextW, scale.scaleNextH, 'btnN');
+            btnN.inputEnabled = true;
+            btnN.events.onInputDown.add(this.btnN, this);
         } else if (number.score >= 80) {
             var text3 = game.add.text(450, 280, 'ดีเยี่ยม', { fill: '#d50000', font: '20px' });
             text3.anchor.x = 0.5;
+            btnN = game.add.sprite(scale.scaleNextW, scale.scaleNextH, 'btnN');
+            btnN.inputEnabled = true;
+            btnN.events.onInputDown.add(this.btnN, this);
         }
         var more = game.add.text(450, 320, 'เรียนรู้เพิ่มเติม', { fill: '#ffffff', font: '20px' });
         more.anchor.x = 0.5;
@@ -1323,6 +1654,9 @@ Stages.copd8.prototype = {
         window.open("https://github.com/supertodtor/Game/raw/develop/%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%A3%E0%B8%B9%E0%B9%89%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%9B%E0%B8%AD%E0%B8%94%E0%B8%AD%E0%B8%B8%E0%B8%94%E0%B8%81%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%A3%E0%B8%B1%E0%B8%87.pdf");
     },
     btnN: function() {
+        this.state.start('copd1');
+    },
+    btnHome: function() {
         this.state.start('copd1');
     }
 
@@ -1342,9 +1676,16 @@ var plan = ['- O2 cannula 3 LPM ', 'Keep O2 sat > 92 %',
     '- Sulbutamol inhalation ', '1 NB ทุก 1 ชม.',
     '- Dexamethazone 5 mg ', 'IV stat then ทุก 6 ชม'
 ];
+var otherp = '';
+var otherp2 = '';
+var othero = '';
+var other1 = ['ดิฉันคิดว่าน่าจะเอกซเรย์ละมีการให้ยาพ่นและไม่ทราบว่า', 'คุณหมอจะเข้ามาดูผู้ป่วยไหมค่ะ'];
+var other2 = ['วันนี้มี case รับใหม่ นายรัก ใจดี อายุ 68 ปี มีโรคประจำตัว COPD รักษา', 'ด้วย  Ventolin MDI 2 puff prn,  Seretide inhaler 1 puff bid,', 'Sulbutamol 5 mg 1 tab tid pc '];
+var other3 = ['ผู้ป่วยรู้สึกตัวดี อุณหภูมิกาย 37.2 องศาเซลเซียส อัตราการหายใจ 30 bpm เสียงหัวใจปกติ BP ', '130/80 mmHg ฟังปอดพบเสียง wheezing (bilateral) O2 sat เหลือ 90% ตอนนี้ได้ให้การ', 'พยาบาลจัด' + otherp + othero + otherp2]
+var other4 = ['ดิฉันนางสาวดวงใจ ดีดวง พยาบาล Incharge ห้อง ER', 'ขอรายงาน Cause ผู้ป่วยชื่อ นายรัก ใจดี เตียง 10'];
 var checkC = 0;
 var c = 0;
-
+var checkD = [false, false, false, false, false, false, false, false, false];
 var cCheck = { c1: false, c2: false, c3: false, c4: false };
 var checkO1 = false;
 var checkO2 = false;
