@@ -215,18 +215,9 @@ Stages.playGame = function(game) {
     var warning1, warning2;
     var mediecation2, recomend2, vs2;
     var m1, m2, m3, cancelM;
-<<<<<<< HEAD
-    var info, finish, people;
-=======
     var info, finish, people, people1, people4, people5, people6, people7, people8, people10, people9;
     var checkP2 = false;
-<<<<<<< HEAD
-
->>>>>>> develop
-
-=======
     var btnHome;
->>>>>>> develop
 };
 Stages.playGame.prototype = {
     preload: function() {
@@ -245,11 +236,6 @@ Stages.playGame.prototype = {
         game.load.image('recomend', './photo/recomend.png')
         game.load.image('info', './photo/info.png');
         game.load.image('finish', './photo/finish.png');
-<<<<<<< HEAD
-        gaem.load.image('people1', './photo/people1.png');
-        game.load.image('people2', './photo/people2.png')
-
-=======
         game.load.image('people1', './photo/people1.png');
         game.load.image('people2', './photo/people2.png');
         game.load.image('people3', './photo/people3.png');
@@ -260,7 +246,6 @@ Stages.playGame.prototype = {
         game.load.image('people8', './photo/people8.png');
         game.load.image('people9', './photo/people9.png');
         game.load.image('people10', './photo/people10.png');
->>>>>>> develop
 
         game.load.image('bar', './photo/bar.png');
         game.load.image('bar1', './photo/bar1.png');
@@ -338,11 +323,7 @@ Stages.playGame.prototype = {
         otherp2 = '';
         othero = '';
         game.add.sprite(0, 0, 'bg');
-<<<<<<< HEAD
-        people = game.add.sprite(500, 250, 'people1');
-=======
         people = game.add.sprite(470, 150, 'people3');
->>>>>>> develop
         //game.add.sprite(0, 60, 'board');
 
         startlogo = game.add.sprite(450, 250, 'startlogo')
@@ -927,11 +908,7 @@ Stages.playGame.prototype = {
 
     },
     checkN: function() {
-<<<<<<< HEAD
-        if (!(position1.inputEnabled && oxygen1.inputEnabled)) {
-=======
         if (!(position1.inputEnabled || oxygen1.inputEnabled)) {
->>>>>>> develop
             this.notify1();
         }
     },
@@ -978,13 +955,9 @@ Stages.playGame.prototype = {
         other3 = ['ผู้ป่วยรู้สึกตัวดี อุณหภูมิกาย 37.2 องศาเซลเซียส อัตราการหายใจ 30 bpm เสียงหัวใจปกติ BP ', '130/80 mmHg ฟังปอดพบเสียง wheezing (bilateral) O2 sat เหลือ 90% ตอนนี้ได้ให้การ', 'พยาบาลจัด' + otherp + othero + otherp2]
     },
     p2: function() {
-<<<<<<< HEAD
-        people = game.add.sprite(500, 250, 'people2');
-=======
         people.destroy();
         checkP2 = true;
         this.checkO();
->>>>>>> develop
         number.score += 10;
         score.setText(number.score);
         position1.inputEnabled = false;
