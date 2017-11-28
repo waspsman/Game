@@ -1880,4 +1880,4 @@ game.state.add('copd8', Stages.copd8);
 game.state.add('copd9', Stages.copd9);
 game.state.add('copd10', Stages.copd10);
 game.state.add('copd11', Stages.copd11);
-game.state.start('copd9');
+game.state.start('playGame');
