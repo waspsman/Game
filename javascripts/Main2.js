@@ -217,9 +217,7 @@ Stages.playGame = function(game) {
     var m1, m2, m3, cancelM;
     var info, finish, people, people1, people4, people5, people6, people7, people8, people10, people9;
     var checkP2 = false;
-
     var btnHome, checkClicko, sound;
-
 };
 Stages.playGame.prototype = {
     preload: function() {
@@ -327,10 +325,8 @@ Stages.playGame.prototype = {
         otherp2 = '';
         othero = '';
         checkClicko = false;
-
         sound = game.add.audio('sound');
         sound.play();
-
         game.add.sprite(0, 0, 'bg');
         people = game.add.sprite(470, 150, 'people3');
         //game.add.sprite(0, 60, 'board');
@@ -1749,6 +1745,7 @@ Stages.copd10.prototype = {
             i++;
             question.setText(questions[i]);
         }
+
     },
     wrong: function() {
 
@@ -1786,8 +1783,16 @@ Stages.copd10.prototype = {
             number.test++;
             i++;
             question.setText(questions[i]);
-        }
 
+        } else if (i == 11) {
+            console.log(i);
+            game.state.start('copd11');
+        } else {
+            console.log(i);
+            i++;
+            question.setText(questions[i]);
+
+        }
 
     }
 };
