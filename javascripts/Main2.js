@@ -217,7 +217,7 @@ Stages.playGame = function(game) {
     var m1, m2, m3, cancelM;
     var info, finish, people, people1, people4, people5, people6, people7, people8, people10, people9;
     var checkP2 = false;
-    var btnHome;
+    var btnHome, checkClicko, sound;
 };
 Stages.playGame.prototype = {
     preload: function() {
@@ -299,6 +299,8 @@ Stages.playGame.prototype = {
         game.load.image('m3', './photo/mediecation/3.png');
         game.load.image('cancelM', './photo/mediecation/cancelM.png');
 
+        game.load.audio('sound', './sound/sound.mp3');
+
     },
     create: function() {
 
@@ -322,6 +324,9 @@ Stages.playGame.prototype = {
         otherp = '';
         otherp2 = '';
         othero = '';
+        checkClicko = false;
+        sound = game.add.audio('sound');
+        sound.play();
         game.add.sprite(0, 0, 'bg');
         people = game.add.sprite(470, 150, 'people3');
         //game.add.sprite(0, 60, 'board');
@@ -950,6 +955,7 @@ Stages.playGame.prototype = {
         position1.inputEnabled = false;
         this.choiceP.destroy();
         checkP2 = false;
+        number.sat = '90%';
         otherp = 'ท่านอนคว่ำ';
         otherp2 = 'หลังให้ O2 sat เพิ่มขึ้นเป็น 90%';
         other3 = ['ผู้ป่วยรู้สึกตัวดี อุณหภูมิกาย 37.2 องศาเซลเซียส อัตราการหายใจ 30 bpm เสียงหัวใจปกติ BP ', '130/80 mmHg ฟังปอดพบเสียง wheezing (bilateral) O2 sat เหลือ 90% ตอนนี้ได้ให้การ', 'พยาบาลจัด' + otherp + othero + otherp2]
@@ -1068,7 +1074,11 @@ Stages.playGame.prototype = {
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
         number.rr = 36;
-        number.sat = '87%';
+        if (checkClicko) {
+            number.sat = '87%';
+            console.log(checkClicko);
+        }
+        checkClicko = true;
         number.bp = '150/90';
         number.rate = 102;
         othero = 'และให้ O2 mask with bag';
@@ -1094,7 +1104,12 @@ Stages.playGame.prototype = {
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
         number.rr = 36;
-        number.sat = '87%';
+        if (checkClicko) {
+            number.sat = '87%';
+            console.log(checkClicko);
+
+        }
+        checkClicko = true;
         number.bp = '150/90';
         number.rate = 102;
         othero = 'และให้ Simple mask';
@@ -1107,7 +1122,12 @@ Stages.playGame.prototype = {
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
         number.rr = 26;
-        number.sat = '95%';
+        if (checkClicko) {
+            number.sat = '95%';
+            console.log(checkClicko);
+
+        }
+        checkClicko = true;
         number.bp = '120/80';
         number.rate = 98
         othero = 'และให้ Oxygen Cannula 3 LPM';
@@ -1118,7 +1138,12 @@ Stages.playGame.prototype = {
         oxygen1.inputEnabled = false;
         this.choiceO.destroy();
         number.rr = 36;
-        number.sat = '87%';
+        if (checkClicko) {
+            number.sat = '87%';
+            console.log(checkClicko);
+
+        }
+        checkClicko = true;
         number.bp = '150/90';
         number.rate = 102;
         othero = 'และให้ Oxygen Cannula 6 LPM';
@@ -1627,14 +1652,181 @@ Stages.copd8.prototype = {
         window.open("https://github.com/supertodtor/Game/raw/develop/%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%A3%E0%B8%B9%E0%B9%89%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%9B%E0%B8%AD%E0%B8%94%E0%B8%AD%E0%B8%B8%E0%B8%94%E0%B8%81%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%A3%E0%B8%B1%E0%B8%87.pdf");
     },
     btnN: function() {
-        this.state.start('copd1');
+        this.state.start('copd9');
     },
     btnHome: function() {
         this.state.start('copd1');
     }
 
 };
+Stages.copd9 = function(game) {
+    var btnPlay, text;
+};
+Stages.copd9.prototype = {
+    preload: function() {
+        game.load.image('copd9', './photo/copd9.png');
+        game.load.image('btnPlay', './photo/btnPlay.png');
+    },
+    create: function() {
+        game.add.sprite(0, 0, 'copd9');
+        text = game.add.text(450, 180, 'แบบทดสอบหลังเรียน');
+        text.anchor.x = 0.5;
+        text.anchor.y = 0.5;
+        btnPlay = game.add.sprite(450, 270, 'btnPlay');
+        btnPlay.anchor.x = 0.5;
+        btnPlay.anchor.y = 0.5;
+        btnPlay.inputEnabled = true;
+        btnPlay.events.onInputDown.add(this.btnPlay, this);
+    },
+    btnPlay: function() {
+        game.state.start('copd10');
+    }
+};
+Stages.copd10 = function(game) {
+    var correct, wrong, des, i, question;
+};
+Stages.copd10.prototype = {
+    preload: function() {
+        game.load.image('afterTest', './photo/afterTest.png');
+    },
+    create: function() {
+        number.test = 0;
+        i = 0;
+        game.add.sprite(0, 0, 'afterTest');
+        //des = game.add.text(450,250,'');
+        question = game.add.text(450, 200, questions[i]);
+        question.anchor.x = 0.5;
+        question.anchor.y = 0.5;
 
+        correct = game.add.text(400, 300, 'ถูกต้อง');
+        wrong = game.add.text(400, 350, 'ผิด');
+        correct.inputEnabled = true;
+        wrong.inputEnabled = true;
+        correct.events.onInputDown.add(this.correct, this);
+        wrong.events.onInputDown.add(this.wrong, this);
+    },
+    correct: function() {
+
+        if (i == 1) {
+            console.log(i)
+            number.test++;
+            i++;
+            question.setText(questions[i]);
+        } else if (i == 0) {
+            console.log(i);
+            i++;
+            question.setText(questions[i]);
+        } else if (i == 2) {
+            console.log(i);
+            number.test++;
+            i++;
+            question.setText(questions[i]);
+        } else if (i == 3) {
+            console.log(i);
+            number.test++;
+            i++;
+            question.setText(questions[i]);
+        } else if (i == 7) {
+            console.log(i);
+            number.test++;
+            i++;
+            question.setText(questions[i]);
+        } else if (i == 10) {
+            console.log(i);
+            number.test++;
+            i++;
+            question.setText(questions[i]);
+        } else if (i == 11) {
+            console.log(i);
+            number.test++;
+            game.state.start('copd11');
+        } else {
+            console.log(i);
+            i++;
+            question.setText(questions[i]);
+        }
+
+    },
+    wrong: function() {
+
+        if (i == 0) {
+            console.log(i);
+            i++;
+            number.test++;
+            question.setText(questions[i]);
+        } else if (i == 4) {
+            console.log(i);
+            number.test++;
+            i++;
+            question.setText(questions[i]);
+
+        } else if (i == 5) {
+            console.log(i);
+            number.test++;
+            i++;
+            question.setText(questions[i]);
+
+        } else if (i == 6) {
+            console.log(i);
+            number.test++;
+            i++;
+            question.setText(questions[i]);
+
+        } else if (i == 8) {
+            console.log(i);
+            number.test++;
+            i++;
+            question.setText(questions[i]);
+
+        } else if (i == 9) {
+            console.log(i);
+            number.test++;
+            i++;
+            question.setText(questions[i]);
+
+        } else if (i == 11) {
+            console.log(i);
+            game.state.start('copd11');
+        } else {
+            console.log(i);
+            i++;
+            question.setText(questions[i]);
+
+        }
+
+    }
+};
+Stages.copd11 = function(game) {
+    var text1, text2, btnHome;
+};
+Stages.copd11.prototype = {
+    preload: function() {
+        game.load.image('copd10', './photo/copd10.png');
+        game.load.image('btnHome', './photo/btnHome.png');
+    },
+    create: function() {
+        game.add.sprite(0, 0, 'copd10');
+        text1 = game.add.text(450, 150, 'คะแนนจากการทำแบบทดสอบหลังเรียน ' + number.test + ' คะแนน');
+        text1.anchor.x = 0.5;
+        text1.anchor.y = 0.5;
+        text2 = game.add.text(450, 250, 'การให้การพยาบาลผู้ป่วย ' + number.score + ' คะแนน');
+        text2.anchor.x = 0.5;
+        text2.anchor.y = 0.5;
+        btnHome = game.add.sprite(scale.scaleNextW, scale.scaleNextH, 'btnHome');
+        btnHome.inputEnabled = true;
+        btnHome.events.onInputDown.add(this.btnHome, this);
+        var more = game.add.text(300, 400, 'เรียนรู้เพิ่มเติม', { fill: '#ffffff', font: '20px' });
+        more.anchor.x = 0.5;
+        more.inputEnabled = true;
+        more.events.onInputDown.add(this.more, this);
+    },
+    btnHome: function() {
+        game.state.start('copd1');
+    },
+    more: function() {
+        window.open("https://github.com/supertodtor/Game/raw/develop/%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%A3%E0%B8%B9%E0%B9%89%E0%B9%80%E0%B8%81%E0%B8%B5%E0%B9%88%E0%B8%A2%E0%B8%A7%E0%B8%81%E0%B8%B1%E0%B8%9A%E0%B9%82%E0%B8%A3%E0%B8%84%E0%B8%9B%E0%B8%AD%E0%B8%94%E0%B8%AD%E0%B8%B8%E0%B8%94%E0%B8%81%E0%B8%B1%E0%B9%89%E0%B8%99%E0%B9%80%E0%B8%A3%E0%B8%B7%E0%B9%89%E0%B8%AD%E0%B8%A3%E0%B8%B1%E0%B8%87.pdf");
+    },
+};
 var scale = {
     'scaleNextW': 780,
     'scaleBackW': 740,
@@ -1642,7 +1834,7 @@ var scale = {
     'scaleBackH': 390
 };
 
-var number = { score: 0, rate: 96, rr: 32, sat: '90%', bp: '130/80', t: 37.2 };
+var number = { score: 0, rate: 96, rr: 32, sat: '90%', bp: '130/80', t: 37.2, test: 0 };
 var awserD = [];
 var plan = ['- O2 cannula 3 LPM ', 'Keep O2 sat > 92 %',
     '- Berodual 1 NB 15 x 3 ', 'then 1 NB ทุก 2 ชม.',
@@ -1666,7 +1858,19 @@ var checkO3 = false;
 var checkm1 = true;
 var checkm2 = true;
 var checkm3 = true;
-
+var questions = ['1. โรคปอดอุดกั้นเรื้อรัง มีความผิดปกติเฉพาะที่ถุงลมปอดเท่านั้น',
+    '2. การสูบบุหรี่เป็นสาเหตุสำคัญที่ทำให้เกิดโรคปอดอุดกั้นเรื้อรัง',
+    '3. อาการที่แสดงถึงระยะ Acute exacerbation of COPD คือ ไอ มีเสมหะข้นขึ้น และหายใจเร็ว',
+    '4. ข้อมูลที่บ่งชี้ว่าผู้ป่วยมีพยาธิสภาพของการตีบแคบของหลอดลม คือ การฟังเสียงปอดพบ wheezing ',
+    '5. ผู้ป่วยรู้สึกดี หายใจเหนื่อยหอบมาก ไอ เสมหะขาวขุ่น ควรประเมิน Circulation ตามหลัก ABCDE',
+    '6. การจัดท่าศีรษะสูง (Fowler’s position) ในผู้ป่วยโรคปอดอุดกั้นเรื้อรัง ช่วยให้หายใจสะดวกมีการระบายเสมหะได้ดีขึ้น',
+    '7. เมื่อฟังปอดพบเสียง wheezing อัตราการหายใจ  32 /min วัด O2Sat ได้ 92% พิจารณาให้ O2 Mask with bag 10  L/M',
+    '8. หลังจากจัดท่านอนศีรษะสูง ให้ออกซิเจนไป 5 นาที พบว่าอัตราการหายใจ  34 /min O2 Sat 90% ควรพิจารณารายงานแพทย์เพื่อให้การรักษาเพิ่มเติม',
+    '9. ข้อมูลผู้ป่วย “หลังให้ออกซิเจน ไปแล้ว 5 นาที พบว่าอัตราการหายใจ  34 /min O2 Sat 90% สัญญาณชีพ RR 30 /min PR 98 /min BP 149/93 mmHg”  เป็นการรายงานสถานการณ์ (Situation: S)   ตามหลัก SBAR',
+    '10. ยา Berodual เป็นยาขยายหลอดลมชนิดออกฤทธิ์สั้น สามารถให้ได้ทุก 4-6 ชั่วโมง',
+    '11. กรณีผู้ป่วยหายใจหอบเหนื่อยมาก RR 36 /min PR 122 /min O2Sat 87% ควรรายงานแพทย์และเตรียมใส่เครื่องช่วยหายใจ',
+    '12. ผู้ป่วยโรคปอดอุดกั้นเรื้อรังควรฝึกการหายใจแบบ Pursed lip breathing exercise เพื่อเพิ่มประสิทธิภาพของปอดและลดการคั่งของ CO2'
+];
 var game = new Phaser.Game(900, 500, Phaser.AUTO, 'game');
 game.state.add('startgame', Stages.startGame);
 game.state.add('copd1', Stages.copd1);
@@ -1677,5 +1881,7 @@ game.state.add('copd6', Stages.copd6);
 game.state.add('copd7', Stages.copd7);
 game.state.add('playGame', Stages.playGame);
 game.state.add('copd8', Stages.copd8);
-
+game.state.add('copd9', Stages.copd9);
+game.state.add('copd10', Stages.copd10);
+game.state.add('copd11', Stages.copd11);
 game.state.start('startgame');
